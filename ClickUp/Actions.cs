@@ -72,7 +72,7 @@ namespace ClickUp
         {
             var client = new ClickUpClient();
             var request = new ClickUpRequest($"/list/{task.ListId}/task", Method.Post, authenticationCredentialsProvider.Value);
-            request.AddJsonBody(new CreateTask
+            request.AddJsonBody(new
             {
                 Name = task.Name,
                 Description = task.Description,
