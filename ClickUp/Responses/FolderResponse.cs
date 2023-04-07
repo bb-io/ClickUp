@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ClickUp.Responses
 {
-    public class TeamResponse
+    public class FolderResponse
     {
-        [JsonProperty("teams")]
-        public List<Team> Teams { get; set; }
+        [JsonProperty("folders")]
+        public List<Folder> Folders { get; set; }
 
-        public TeamResponse() { Teams = new List<Team>(); }
+        public FolderResponse() { Folders = new List<Folder>(); }
     }
 }
