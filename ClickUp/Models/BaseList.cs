@@ -46,7 +46,7 @@ namespace ClickUp.Models
         //public object OverrideStatuses { get; set; }
 
         [JsonProperty("statuses")]
-        public List<Status> Statuses { get; set; }
+        public List<StatusModel> Statuses { get; set; }
 
         [JsonProperty("permission_level")]
         public string PermissionLevel { get; set; }

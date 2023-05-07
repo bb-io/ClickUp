@@ -24,8 +24,8 @@ namespace ClickUp.Models
         [JsonProperty("description")]
         public string Description { get; set; }
 
-        //[JsonProperty("status")]
-        //public Status Status { get; set; }
+        [JsonProperty("status")]
+        public StatusModel Status { get; set; }
 
         [JsonProperty("orderindex")]
         public string Orderindex { get; set; }

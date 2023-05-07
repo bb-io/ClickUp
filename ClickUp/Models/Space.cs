@@ -25,7 +25,7 @@ namespace ClickUp.Models
         public string Avatar { get; set; }
 
         [JsonProperty("statuses")]
-        public List<Status> Statuses { get; set; }
+        public List<StatusModel> Statuses { get; set; }
 
         [JsonProperty("multiple_assignees")]
         public bool MultipleAssignees { get; set; }

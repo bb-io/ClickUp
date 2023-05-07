@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace ClickUp.Models
 {
-    public class Status
+    public class StatusModel
     {
         [JsonProperty("id")]
         public string Id { get; set; }
 
         [JsonProperty("status")]
-        public string Name { get; set; }
+        public string Status { get; set; }
 
         [JsonProperty("type")]
         public string Type { get; set; }

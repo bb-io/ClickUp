@@ -19,17 +19,25 @@ namespace ClickUp.Connections
                 ConnectionUsage = ConnectionUsage.Actions,
                 ConnectionProperties = new List<ConnectionProperty>()
                 {
-                    new ConnectionProperty("token")
+                    new ConnectionProperty("Team ID"),
+                    new ConnectionProperty("Token")
                 }
             }
         };
 
         public IEnumerable<AuthenticationCredentialsProvider> CreateAuthorizationCredentialsProviders(Dictionary<string, string> values)
         {
-            var token = values.First(v => v.Key == "token");
+            var teamId = values.First(v => v.Key == "Team ID");
             yield return new AuthenticationCredentialsProvider(
                 AuthenticationCredentialsRequestLocation.Header,
-                token.Key,
+                "teamId",
+                teamId.Value
+            );
+
+            var token = values.First(v => v.Key == "Token");
+            yield return new AuthenticationCredentialsProvider(
+                AuthenticationCredentialsRequestLocation.Header,
+                "token",
                 token.Value
             );
         }

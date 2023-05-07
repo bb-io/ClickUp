@@ -2,10 +2,12 @@
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using ClickUp.InputParameters;
+using ClickUp.Models;
 using ClickUp.Requests;
 using ClickUp.Responses;
 using RestSharp;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ClickUp
 {
@@ -61,11 +63,12 @@ namespace ClickUp
         }
 
         [Action("Get task", Description = "Get the details of a specific task")]
-        public Models.Task GetTasks(IEnumerable<AuthenticationCredentialsProvider> authenticationCredentialsProviders, [ActionParameter] string taskId)
+        public TaskWithStatus GetTasks(IEnumerable<AuthenticationCredentialsProvider> authenticationCredentialsProviders, [ActionParameter] string taskId)
         {
             var client = new ClickUpClient();
             var request = new ClickUpRequest($"/task/{taskId}", Method.Get, authenticationCredentialsProviders);
-            return client.Get<Models.Task>(request);
+            var response = client.Get<Models.Task>(request);
+            return TaskWithStatus.FromTask(response);
         }
 
         [Action("Create task", Description = "Create a new task")]
@@ -79,6 +82,15 @@ namespace ClickUp
                 Description = task.Description,
             });
             return client.Post<Models.Task>(request);
+        }
+
+        [Action("Create task attachment", Description = "Adds files as an attachment to a task")]
+        public AttachmentResponse CreateAttachment(IEnumerable<AuthenticationCredentialsProvider> authenticationCredentialsProviders, [ActionParameter] Attachment attachment)
+        {
+            var client = new ClickUpClient();
+            var request = new ClickUpRequest($"/task/{attachment.TaskId}/attachment", Method.Post, authenticationCredentialsProviders);
+            request.AddFile("attachment", attachment.File, attachment.FileName);
+            return client.Post<AttachmentResponse>(request);
         }
     }
 }
