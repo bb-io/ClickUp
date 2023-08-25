@@ -1,51 +1,63 @@
 ﻿using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Webhooks;
-using ClickUp.Models;
-using ClickUp.Webhooks.Responses;
+using Blackbird.Applications.Sdk.Utils.Extensions.Http;
+using ClickUp.Api;
+using ClickUp.Constants;
+using ClickUp.Models.Request.Team;
+using ClickUp.Webhooks.Models.Request;
+using ClickUp.Webhooks.Models.Response;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Task = System.Threading.Tasks.Task;
 
-namespace ClickUp.Webhooks.Handlers
+namespace ClickUp.Webhooks.Handlers;
+
+public abstract class BaseWebhookHandler : IWebhookEventHandler
 {
-    public class BaseWebhookHandler : IWebhookEventHandler
+    protected abstract string EventType { get; }
+    private string TeamId { get; }
+    
+    private ClickUpClient Client { get; }
+
+    public BaseWebhookHandler([WebhookParameter] TeamRequest input)
     {
-        private string _event;
+        TeamId = input.TeamId;
+        Client = new();
+    }
 
-        public BaseWebhookHandler(string @event)
+    public Task SubscribeAsync(IEnumerable<AuthenticationCredentialsProvider> creds, Dictionary<string, string> values)
+    {
+        var payload = new AddWebhookRequest()
         {
-            _event = @event;
-        }
+            Endpoint = values["payloadUrl"],
+            Events = new List<string> { EventType }
+        };
 
-        public async Task SubscribeAsync(IEnumerable<AuthenticationCredentialsProvider> authenticationCredentialsProviders, Dictionary<string, string> values)
-        {
-            var teamId = authenticationCredentialsProviders.First(p => p.KeyName == "teamId").Value;
-            var client = new ClickUpClient();
-            var request = new ClickUpRequest($"/team/{teamId}/webhook", Method.Post, authenticationCredentialsProviders);
-            request.AddJsonBody(new
-            {
-                endpoint = values["payloadUrl"],
-                events = new List<string> { _event }
-            });
-            client.Post(request);
-        }
+        var endpoint = $"{ApiEndpoints.Teams}/{TeamId}{ApiEndpoints.Webhooks}";
+        var request = new ClickUpRequest(endpoint, Method.Post, creds)
+            .WithJsonBody(payload, JsonConfig.Settings);
 
-        public async Task UnsubscribeAsync(IEnumerable<AuthenticationCredentialsProvider> authenticationCredentialsProviders, Dictionary<string, string> values)
-        {
-            var teamId = authenticationCredentialsProviders.First(p => p.KeyName == "teamId").Value;
-            var client = new ClickUpClient();
-            var request = new ClickUpRequest($"/team/{teamId}/webhook", Method.Get, authenticationCredentialsProviders);
-            var webhooks = client.Get<WebhooksResponse>(request);
-            var currentHookId = webhooks.Webhooks.FirstOrDefault(x => x.Events.Contains(_event))?.Id;
-            if (currentHookId == null)
-                return;
+        return Client.ExecuteWithErrorHandling(request);
+    }
 
-            var deleteRequest = new ClickUpRequest($"/webhook/{currentHookId}", Method.Delete, authenticationCredentialsProviders);
-            client.Delete(deleteRequest);
-        }
+    public async Task UnsubscribeAsync(IEnumerable<AuthenticationCredentialsProvider> creds, Dictionary<string, string> values)
+    {
+        var allWebhooks = await GetAllWebhooks(creds);
+        var currentHook = allWebhooks.Webhooks
+            .FirstOrDefault(x => x.Endpoint == values["payloadUrl"]);
+        
+        if (currentHook == null)
+            return;
+
+        var endpoint = $"{ApiEndpoints.Webhooks}/{currentHook.Id}";
+        var request = new ClickUpRequest(endpoint, Method.Delete, creds);
+        
+        await Client.ExecuteWithErrorHandling(request);
+    }
+
+    private Task<WebhooksResponse> GetAllWebhooks(IEnumerable<AuthenticationCredentialsProvider> creds)
+    {
+        var endpoint = $"{ApiEndpoints.Teams}/{TeamId}{ApiEndpoints.Webhooks}";
+        var request = new ClickUpRequest(endpoint, Method.Get, creds);
+        
+        return Client.ExecuteWithErrorHandling<WebhooksResponse>(request);
     }
 }

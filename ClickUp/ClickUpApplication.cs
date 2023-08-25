@@ -1,30 +1,24 @@
 ﻿using Blackbird.Applications.Sdk.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ClickUp
+namespace ClickUp;
+
+public class ClickUpApplication : IApplication
 {
-    public class ClickUpApplication : IApplication
+    private string _name;
+
+    public ClickUpApplication()
     {
-        private string _name;
+        _name = "ClickUp";
+    }
 
-        public ClickUpApplication()
-        {
-            _name = "ClickUp";
-        }
+    public string Name
+    {
+        get => _name;
+        set => _name = value;
+    }
 
-        public string Name
-        {
-            get => _name;
-            set => _name = value;
-        }
-
-        public T GetInstance<T>()
-        {
-            throw new NotImplementedException();
-        }
+    public T GetInstance<T>()
+    {
+        throw new NotImplementedException();
     }
 }
