@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ClickUp.Webhooks.Models.Response;
+namespace ClickUp.Webhooks.Models.Payloads.Additional;
 
 public class WebhooksResponse
 {

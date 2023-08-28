@@ -1,6 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Webhooks.Models.Payloads;
+namespace ClickUp.Webhooks.Models.Payloads.Additional;
 
 public class User
 {

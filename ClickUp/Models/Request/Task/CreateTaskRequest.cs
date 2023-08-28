@@ -2,7 +2,6 @@
 using Blackbird.Applications.Sdk.Common.Dynamic;
 using ClickUp.DataSourceHandlers.EnumHandlers;
 using ClickUp.Models.Entities.Simple;
-using ClickUp.Utils;
 using ClickUp.Utils.Converters;
 using Newtonsoft.Json;
 

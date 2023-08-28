@@ -1,6 +1,5 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 using ClickUp.Models.Entities.Base;
-using ClickUp.Utils;
 using ClickUp.Utils.Converters;
 using Newtonsoft.Json;
 

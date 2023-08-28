@@ -2,7 +2,7 @@
 using ClickUp.Utils.Converters;
 using Newtonsoft.Json;
 
-namespace ClickUp.Webhooks.Models.Payloads;
+namespace ClickUp.Webhooks.Models.Payloads.Additional;
 
 public class HistoryItem
 {

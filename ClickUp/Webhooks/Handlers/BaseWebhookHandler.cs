@@ -4,8 +4,8 @@ using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 using ClickUp.Api;
 using ClickUp.Constants;
 using ClickUp.Models.Request.Team;
+using ClickUp.Webhooks.Models.Payloads.Additional;
 using ClickUp.Webhooks.Models.Request;
-using ClickUp.Webhooks.Models.Response;
 using RestSharp;
 
 namespace ClickUp.Webhooks.Handlers;
