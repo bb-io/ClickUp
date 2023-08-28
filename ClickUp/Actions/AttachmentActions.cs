@@ -27,7 +27,7 @@ public class AttachmentActions : ClickUpActions
     {
         var endpoint = $"{ApiEndpoints.Tasks}/{input.TaskId}{ApiEndpoints.Attachments}";
         var request = new ClickUpRequest(endpoint.WithQuery(query), Method.Post, Creds)
-            .WithFile(input.File, input.FileName, "attachment");
+            .WithFile(input.File.Bytes, input.FileName ?? input.File.Name, "attachment");
         
         return Client.ExecuteWithErrorHandling<AttachmentEntity>(request);
     }
