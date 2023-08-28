@@ -1,5 +1,8 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 using ClickUp.Models.Entities.Base;
+using ClickUp.Utils;
+using ClickUp.Utils.Converters;
+using Newtonsoft.Json;
 
 namespace ClickUp.Models.Entities;
 
@@ -16,16 +19,20 @@ public class TaskEntity : ClickUpEntity
     public StatusModel Status { get; set; }
 
     [Display("Date created")]
+    [JsonConverter(typeof(UnixTimestampConverter))]
     public DateTime DateCreated { get; set; }
 
     [Display("Date updated")]
-    public string DateUpdated { get; set; }
+    [JsonConverter(typeof(UnixTimestampConverter))]
+    public DateTime DateUpdated { get; set; }
 
     [Display("Date closed")]
-    public string DateClosed { get; set; }
+    [JsonConverter(typeof(UnixTimestampConverter))]
+    public DateTime? DateClosed { get; set; }
 
     [Display("Date done")]
-    public string DateDone { get; set; }
+    [JsonConverter(typeof(UnixTimestampConverter))]
+    public DateTime? DateDone { get; set; }
 
     [Display("Custom fields")]
     public IEnumerable<CustomField> CustomFields { get; set; }

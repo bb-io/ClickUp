@@ -1,4 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
+using ClickUp.Utils.Converters;
+using Newtonsoft.Json;
 
 namespace ClickUp.Webhooks.Models.Payloads;
 
@@ -9,7 +11,8 @@ public class HistoryItem
 
     public int Type { get; set; }
 
-    public string Date { get; set; }
+    [JsonConverter(typeof(UnixTimestampConverter))]
+    public DateTime Date { get; set; }
 
     public string Field { get; set; }
 

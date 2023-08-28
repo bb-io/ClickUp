@@ -15,6 +15,15 @@ public class ClickUpClient : BlackBirdRestClient
     })
     {
     }
+    
+    public new async Task<T> ExecuteWithErrorHandling<T>(RestRequest request)
+    {
+        var response = await ExecuteWithErrorHandling(request);
+        var json = response.Content!;
+
+        return JsonConvert.DeserializeObject<T>(json, JsonConfig.Settings) ??
+               throw new($"Could not parse {json} to {typeof(T)}");
+    }
 
     protected override Exception ConfigureErrorException(RestResponse response)
     {

@@ -2,6 +2,9 @@
 using Blackbird.Applications.Sdk.Common.Dynamic;
 using ClickUp.DataSourceHandlers.EnumHandlers;
 using ClickUp.Models.Entities.Simple;
+using ClickUp.Utils;
+using ClickUp.Utils.Converters;
+using Newtonsoft.Json;
 
 namespace ClickUp.Models.Request.Task;
 
@@ -20,7 +23,8 @@ public class CreateTaskRequest
     public string? Priority { get; set; }
 
     [Display("Due date")]
-    public long? DueDate { get; set; }
+    [JsonConverter(typeof(UnixTimestampConverter))] 
+    public DateTime? DueDate { get; set; }
     
     [Display("Due date time")]
 
@@ -31,7 +35,8 @@ public class CreateTaskRequest
     public int? TimeEstimate { get; set; }
 
     [Display("Start date")]
-    public long? StartDate { get; set; }
+    [JsonConverter(typeof(UnixTimestampConverter))] 
+    public DateTime? StartDate { get; set; }
 
     [Display("Start date time")]
     public bool? StartDateTime { get; set; }

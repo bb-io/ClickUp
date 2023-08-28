@@ -1,4 +1,7 @@
 ﻿using Blackbird.Applications.Sdk.Common;
+using ClickUp.Utils;
+using ClickUp.Utils.Converters;
+using Newtonsoft.Json;
 
 namespace ClickUp.Models.Entities;
 
@@ -9,7 +12,8 @@ public class AttachmentEntity
 
     public string Version { get; set; }
 
-    public long Date { get; set; }
+    [JsonConverter(typeof(UnixTimestampConverter))]
+    public DateTime Date { get; set; }
 
     public string Title { get; set; }
 

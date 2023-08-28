@@ -1,4 +1,7 @@
-﻿namespace ClickUp.Models.Entities;
+﻿using ClickUp.Utils.Converters;
+using Newtonsoft.Json;
+
+namespace ClickUp.Models.Entities;
 
 public class CustomField
 {
@@ -8,7 +11,8 @@ public class CustomField
 
     public string Type { get; set; }
 
-    public string DateCreated { get; set; }
+    [JsonConverter(typeof(UnixTimestampConverter))]
+    public DateTime DateCreated { get; set; }
 
     public bool HideFromGuests { get; set; }
 
