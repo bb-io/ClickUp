@@ -22,7 +22,7 @@ public class TaskActions : ClickUpActions
     {
     }
     
-    [Action("Get tasks from list", Description = "Get all tasks given a specific list")]
+    [Action("Get tasks", Description = "Get all tasks given a specific list")]
     public Task<ListTasksResponse> GetTasksFromList([ActionParameter] ListRequest list)
     {
         var endpoint = $"{ApiEndpoints.Lists}/{list.ListId}{ApiEndpoints.Tasks}";

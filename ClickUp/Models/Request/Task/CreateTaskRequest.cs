@@ -26,11 +26,9 @@ public class CreateTaskRequest
     public DateTime? DueDate { get; set; }
     
     [Display("Due date time")]
-
     public bool? DueDateTime { get; set; }
     
     [Display("Time estimate")]
-
     public int? TimeEstimate { get; set; }
 
     [Display("Start date")]

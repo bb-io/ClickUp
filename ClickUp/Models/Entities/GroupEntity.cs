@@ -4,23 +4,23 @@ using Newtonsoft.Json;
 
 namespace ClickUp.Models.Entities;
 
-public class CustomField
+public class GroupEntity
 {
-    [Display("Custom field ID")]
+    [Display("Group ID")]
     public string Id { get; set; }
-
+    
+    [Display("Team ID")]
+    public string TeamId { get; set; }
+    
     public string Name { get; set; }
-
-    public string Type { get; set; }
-
+    
+    public string Handle { get; set; }
+    
     [Display("Date created")]
     [JsonConverter(typeof(UnixTimestampConverter))]
     public DateTime DateCreated { get; set; }
+    
+    public string Initials { get; set; }
 
-    [Display("Hide from guests")]
-    public bool HideFromGuests { get; set; }
-
-    public bool Required { get; set; }
-
-    public List<string> Value { get; set; }
+    public IEnumerable<UserEntity> Members { get; set; }
 }

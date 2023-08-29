@@ -20,5 +20,5 @@ public class TeamActions : ClickUpActions
     {
         var request = new ClickUpRequest(ApiEndpoints.Teams, Method.Get, Creds);
         return Client.ExecuteWithErrorHandling<ListTeamsResponse>(request);
-    }
+    }    
 }

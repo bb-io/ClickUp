@@ -4,5 +4,5 @@ namespace ClickUp.Models.Response.List;
 
 public record ListListsResponse
 {
-    public IEnumerable<ListWithFolderEntity> Lists { get; set; }
+    public IEnumerable<ListEntity> Lists { get; set; }
 }
