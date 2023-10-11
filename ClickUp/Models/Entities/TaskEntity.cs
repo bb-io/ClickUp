@@ -1,5 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 using ClickUp.Models.Entities.Base;
+using ClickUp.Models.Entities.Simple;
 using ClickUp.Utils.Converters;
 using Newtonsoft.Json;
 
@@ -44,4 +45,6 @@ public class TaskEntity : ClickUpEntity
     
     [Display("Time spent")]
     public int? TimeSpent { get; set; }
+    
+    public SimpleList List { get; set; }
 }

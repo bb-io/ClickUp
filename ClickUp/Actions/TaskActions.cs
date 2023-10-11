@@ -32,7 +32,7 @@ public class TaskActions : ClickUpActions
     }
 
     [Action("Get task", Description = "Get the details of a specific task")]
-    public Task<TaskEntity> GetTasks([ActionParameter] TaskRequest task)
+    public Task<TaskEntity> GetTask([ActionParameter] TaskRequest task)
     {
         var endpoint = $"{ApiEndpoints.Tasks}/{task.TaskId}";
         var request = new ClickUpRequest(endpoint, Method.Get, Creds);

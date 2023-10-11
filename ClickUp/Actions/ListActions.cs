@@ -78,4 +78,14 @@ public class ListActions : ClickUpActions
         
         return Client.ExecuteWithErrorHandling(request);
     }
+    
+    [Action("Get list", Description = "Get specific list")]
+    public Task<ListEntity> GetList(
+        [ActionParameter] ListRequest list)
+    {
+        var endpoint = $"{ApiEndpoints.Lists}/{list.ListId}";
+        var request = new ClickUpRequest(endpoint, Method.Get, Creds);
+        
+        return Client.ExecuteWithErrorHandling<ListEntity>(request);
+    }
 }
