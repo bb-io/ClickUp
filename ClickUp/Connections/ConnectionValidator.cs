@@ -2,7 +2,6 @@
 using Blackbird.Applications.Sdk.Common.Connections;
 using ClickUp.Api;
 using ClickUp.Constants;
-using ClickUp.Models.Response.Team;
 using RestSharp;
 
 namespace ClickUp.Connections;

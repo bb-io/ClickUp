@@ -7,10 +7,15 @@ using ClickUp.Actions.Base;
 using ClickUp.Api;
 using ClickUp.Constants;
 using ClickUp.Models.Entities;
+using ClickUp.Models.Entities.CustomFields;
 using ClickUp.Models.Request;
+using ClickUp.Models.Request.CustomField;
 using ClickUp.Models.Request.List;
 using ClickUp.Models.Request.Task;
+using ClickUp.Models.Response.CusomField;
 using ClickUp.Models.Response.Task;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 
 namespace ClickUp.Actions;
@@ -21,13 +26,13 @@ public class TaskActions : ClickUpActions
     public TaskActions(InvocationContext invocationContext) : base(invocationContext)
     {
     }
-    
+
     [Action("Get tasks", Description = "Get all tasks given a specific list")]
     public Task<ListTasksResponse> GetTasksFromList([ActionParameter] ListRequest list)
     {
         var endpoint = $"{ApiEndpoints.Lists}/{list.ListId}{ApiEndpoints.Tasks}";
         var request = new ClickUpRequest(endpoint, Method.Get, Creds);
-        
+
         return Client.ExecuteWithErrorHandling<ListTasksResponse>(request);
     }
 
@@ -36,7 +41,7 @@ public class TaskActions : ClickUpActions
     {
         var endpoint = $"{ApiEndpoints.Tasks}/{task.TaskId}";
         var request = new ClickUpRequest(endpoint, Method.Get, Creds);
-        
+
         return Client.ExecuteWithErrorHandling<TaskEntity>(request);
     }
 
@@ -49,17 +54,99 @@ public class TaskActions : ClickUpActions
         var endpoint = $"{ApiEndpoints.Lists}/{list.ListId}{ApiEndpoints.Tasks}";
         var request = new ClickUpRequest(endpoint.WithQuery(query), Method.Post, Creds)
             .WithJsonBody(requestBody, JsonConfig.Settings);
-        
+
         return Client.ExecuteWithErrorHandling<TaskEntity>(request);
     }
-    
+
     [Action("Delete task", Description = "Delete specific task")]
     public Task DeleteTask(
         [ActionParameter] TaskRequest task)
     {
         var endpoint = $"{ApiEndpoints.Tasks}/{task.TaskId}";
         var request = new ClickUpRequest(endpoint, Method.Delete, Creds);
-        
+
         return Client.ExecuteWithErrorHandling(request);
     }
+
+    #region Get custom field
+
+    [Action("Get task string custom field",
+        Description = "Get task custom field with a string value")]
+    public async Task<StringCustomFieldEntity> GetTaskStringCustomField(
+        [ActionParameter] TaskRequest task,
+        [ActionParameter] CustomFieldNameRequest field)
+    {
+        var customFields = await ListTaskCustomFields(task);
+
+        var result = customFields.CustomFields
+            .FirstOrDefault(jObject =>
+                jObject["name"]?.ToString() == field.Name && jObject["value"] is JValue { Type: JTokenType.String });
+
+        if (result is null)
+            throw new("No custom field found with the provided name");
+
+        return result.ToObject<StringCustomFieldEntity>()!;
+    }
+
+    [Action("Get task number custom field",
+        Description = "Get task custom field with a number value")]
+    public async Task<NumberCustomFieldEntity> GetTaskNumberCustomField([ActionParameter] TaskRequest task,
+        [ActionParameter] CustomFieldNameRequest field)
+    {
+        var customFields = await ListTaskCustomFields(task);
+
+        var result = customFields.CustomFields
+            .FirstOrDefault(jObject =>
+                jObject["name"]?.ToString() == field.Name && int.TryParse(jObject["value"]?.ToString(), out _));
+
+        if (result is null)
+            throw new("No custom field found with the provided name");
+
+        return result.ToObject<NumberCustomFieldEntity>()!;
+    }
+
+    [Action("Get task date custom field",
+        Description = "Get task custom field with a date value")]
+    public async Task<DateCustomFieldEntity> GetTaskDateCustomField([ActionParameter] TaskRequest task,
+        [ActionParameter] CustomFieldNameRequest field)
+    {
+        var customFields = await ListTaskCustomFields(task);
+
+        var result = customFields.CustomFields
+            .FirstOrDefault(jObject =>
+                jObject["name"]?.ToString() == field.Name && jObject["type"]?.ToString() == "date");
+
+        if (result is null)
+            throw new("No custom field found with the provided name");
+
+        return result.ToObject<DateCustomFieldEntity>()!;
+    }
+
+    [Action("Get task location custom field",
+        Description = "Get task custom field with a location value")]
+    public async Task<LocationCustomFieldEntity> GetTaskLocationCustomField([ActionParameter] TaskRequest task,
+        [ActionParameter] CustomFieldNameRequest field)
+    {
+        var customFields = await ListTaskCustomFields(task);
+
+        var serializer = JsonSerializer.Create(JsonConfig.Settings);
+        var result = customFields.CustomFields
+            .FirstOrDefault(jObject =>
+                jObject["name"]?.ToString() == field.Name && jObject["type"]?.ToString() == "location");
+
+        if (result is null)
+            throw new("No custom field found with the provided name");
+
+        return result.ToObject<LocationCustomFieldEntity>(serializer)!;
+    }
+
+    private Task<TaskCustomFieldsResponse> ListTaskCustomFields(TaskRequest task)
+    {
+        var endpoint = $"{ApiEndpoints.Tasks}/{task.TaskId}";
+        var request = new ClickUpRequest(endpoint, Method.Get, Creds);
+
+        return Client.ExecuteWithErrorHandling<TaskCustomFieldsResponse>(request);
+    }
+
+    #endregion
 }

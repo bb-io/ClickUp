@@ -13,4 +13,5 @@ public static class ApiEndpoints
     public const string KeyResults = "/key_result";
     public const string Tags = "/tag";
     public const string Groups = "/group";
+    public const string CustomFields = "/field";
 }
