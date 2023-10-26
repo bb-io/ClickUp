@@ -111,5 +111,5 @@ In the future we can add actions for:
 ## Feedback
 
 Feedback to our implementation of ClickUp is always very welcome. Reach out to us using the established channels or create an issue.
-
+ 
 <!-- end docs -->
