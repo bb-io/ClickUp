@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <Product>ClickUp</Product>
         <Description>Customizable workplace productivity platform</Description>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
         <AssemblyName>Apps.ClickUp</AssemblyName>
     </PropertyGroup>
 
