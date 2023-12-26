@@ -1,7 +1,7 @@
+using Apps.ClickUp.Models.Request.Task;
 using Blackbird.Applications.Sdk.Common;
-using ClickUp.Models.Request.Task;
 
-namespace ClickUp.Models.Request.CustomField;
+namespace Apps.ClickUp.Models.Request.CustomField;
 
 public class CustomFieldRequest : TaskRequest
 {

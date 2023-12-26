@@ -1,9 +1,9 @@
-﻿using Blackbird.Applications.Sdk.Common;
+﻿using Apps.ClickUp.Api;
+using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Invocation;
-using ClickUp.Api;
 
-namespace ClickUp.Actions.Base;
+namespace Apps.ClickUp.Actions.Base;
 
 public class ClickUpActions : BaseInvocable
 {

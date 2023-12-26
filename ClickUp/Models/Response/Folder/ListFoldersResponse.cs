@@ -1,6 +1,6 @@
-﻿using ClickUp.Models.Entities;
+﻿using Apps.ClickUp.Models.Entities;
 
-namespace ClickUp.Models.Response.Folder;
+namespace Apps.ClickUp.Models.Response.Folder;
 
 public class ListFoldersResponse
 {

@@ -1,5 +1,5 @@
-﻿using ClickUp.Models.Entities;
+﻿using Apps.ClickUp.Models.Entities;
 
-namespace ClickUp.Models.Response.Group;
+namespace Apps.ClickUp.Models.Response.Group;
 
 public record ListGroupsResponse(GroupEntity[] Groups);

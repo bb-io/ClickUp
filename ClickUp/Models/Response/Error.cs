@@ -1,4 +1,4 @@
-﻿namespace ClickUp.Models.Response;
+﻿namespace Apps.ClickUp.Models.Response;
 
 public class Error
 {

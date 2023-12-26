@@ -1,7 +1,7 @@
-using ClickUp.Utils.Converters;
+using Apps.ClickUp.Utils.Converters;
 using Newtonsoft.Json;
 
-namespace ClickUp.Models.Request.CustomField;
+namespace Apps.ClickUp.Models.Request.CustomField;
 
 public class CustomFieldDateValue
 {

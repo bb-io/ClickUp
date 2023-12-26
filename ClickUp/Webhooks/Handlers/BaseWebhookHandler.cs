@@ -1,14 +1,14 @@
-﻿using Blackbird.Applications.Sdk.Common.Authentication;
+﻿using Apps.ClickUp.Api;
+using Apps.ClickUp.Constants;
+using Apps.ClickUp.Models.Request.Team;
+using Apps.ClickUp.Webhooks.Models.Payloads.Additional;
+using Apps.ClickUp.Webhooks.Models.Request;
+using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Webhooks;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
-using ClickUp.Api;
-using ClickUp.Constants;
-using ClickUp.Models.Request.Team;
-using ClickUp.Webhooks.Models.Payloads.Additional;
-using ClickUp.Webhooks.Models.Request;
 using RestSharp;
 
-namespace ClickUp.Webhooks.Handlers;
+namespace Apps.ClickUp.Webhooks.Handlers;
 
 public abstract class BaseWebhookHandler : IWebhookEventHandler
 {

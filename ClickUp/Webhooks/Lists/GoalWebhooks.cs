@@ -1,9 +1,9 @@
-﻿using Blackbird.Applications.Sdk.Common.Webhooks;
-using ClickUp.Webhooks.Handlers.Goal;
-using ClickUp.Webhooks.Lists.Base;
-using ClickUp.Webhooks.Models.Payloads.Responses;
+﻿using Apps.ClickUp.Webhooks.Handlers.Goal;
+using Apps.ClickUp.Webhooks.Lists.Base;
+using Apps.ClickUp.Webhooks.Models.Payloads.Responses;
+using Blackbird.Applications.Sdk.Common.Webhooks;
 
-namespace ClickUp.Webhooks.Lists;
+namespace Apps.ClickUp.Webhooks.Lists;
 
 [WebhookList]
 public class GoalWebhooks : ClickUpWebhookList

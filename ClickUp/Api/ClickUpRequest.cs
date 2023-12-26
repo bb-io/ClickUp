@@ -1,10 +1,10 @@
-﻿using Blackbird.Applications.Sdk.Common.Authentication;
+﻿using Apps.ClickUp.Constants;
+using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using Blackbird.Applications.Sdk.Utils.RestSharp;
-using ClickUp.Constants;
 using RestSharp;
 
-namespace ClickUp.Api;
+namespace Apps.ClickUp.Api;
 
 public class ClickUpRequest : BlackBirdRestRequest
 {

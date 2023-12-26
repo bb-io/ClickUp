@@ -1,4 +1,4 @@
-﻿namespace ClickUp.Webhooks.Models.Request;
+﻿namespace Apps.ClickUp.Webhooks.Models.Request;
 
 public class AddWebhookRequest
 {

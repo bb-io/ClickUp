@@ -1,8 +1,8 @@
-using ClickUp.Models.Entities.CustomFields.Base;
-using ClickUp.Utils.Converters;
+using Apps.ClickUp.Models.Entities.CustomFields.Base;
+using Apps.ClickUp.Utils.Converters;
 using Newtonsoft.Json;
 
-namespace ClickUp.Models.Entities.CustomFields;
+namespace Apps.ClickUp.Models.Entities.CustomFields;
 
 public class DateCustomFieldEntity : CustomFieldEntity
 {

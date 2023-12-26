@@ -1,6 +1,6 @@
 using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Models.Entities.CustomFields.Base;
+namespace Apps.ClickUp.Models.Entities.CustomFields.Base;
 
 public class CustomFieldEntity
 {

@@ -1,6 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Models.Request.Tag;
+namespace Apps.ClickUp.Models.Request.Tag;
 
 public class CreateTagInput
 {

@@ -1,6 +1,6 @@
-﻿using ClickUp.Models.Entities;
+﻿using Apps.ClickUp.Models.Entities;
 
-namespace ClickUp.Models.Response.Space;
+namespace Apps.ClickUp.Models.Response.Space;
 
 public class ListSpacesResponse
 {

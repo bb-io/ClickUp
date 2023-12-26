@@ -1,8 +1,8 @@
-﻿using Blackbird.Applications.Sdk.Common.Authentication;
+﻿using Apps.ClickUp.Constants;
+using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Connections;
-using ClickUp.Constants;
 
-namespace ClickUp.Connections;
+namespace Apps.ClickUp.Connections;
 
 public class ConnectionDefinition : IConnectionDefinition
 {

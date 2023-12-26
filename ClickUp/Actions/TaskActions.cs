@@ -1,24 +1,23 @@
-﻿using Blackbird.Applications.Sdk.Common;
+﻿using Apps.ClickUp.Actions.Base;
+using Apps.ClickUp.Api;
+using Apps.ClickUp.Constants;
+using Apps.ClickUp.Models.Entities;
+using Apps.ClickUp.Models.Entities.CustomFields;
+using Apps.ClickUp.Models.Request;
+using Apps.ClickUp.Models.Request.CustomField;
+using Apps.ClickUp.Models.Request.List;
+using Apps.ClickUp.Models.Request.Task;
+using Apps.ClickUp.Models.Response.Task;
+using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 using Blackbird.Applications.Sdk.Utils.Extensions.String;
-using ClickUp.Actions.Base;
-using ClickUp.Api;
-using ClickUp.Constants;
-using ClickUp.Models.Entities;
-using ClickUp.Models.Entities.CustomFields;
-using ClickUp.Models.Request;
-using ClickUp.Models.Request.CustomField;
-using ClickUp.Models.Request.List;
-using ClickUp.Models.Request.Task;
-using ClickUp.Models.Response.CusomField;
-using ClickUp.Models.Response.Task;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
-namespace ClickUp.Actions;
+namespace Apps.ClickUp.Actions;
 
 [ActionList]
 public class TaskActions : ClickUpActions

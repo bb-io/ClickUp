@@ -1,5 +1,5 @@
-using ClickUp.Models.Entities.CustomFields.Base;
+using Apps.ClickUp.Models.Entities.CustomFields.Base;
 
-namespace ClickUp.Models.Response.CusomField;
+namespace Apps.ClickUp.Models.Response.CusomField;
 
 public record ListCustomFieldsResponse(IEnumerable<CustomFieldEntity> Fields);

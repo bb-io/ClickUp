@@ -1,11 +1,11 @@
-﻿using Blackbird.Applications.Sdk.Utils.Extensions.String;
+﻿using Apps.ClickUp.Constants;
+using Apps.ClickUp.Models.Response;
+using Blackbird.Applications.Sdk.Utils.Extensions.String;
 using Blackbird.Applications.Sdk.Utils.RestSharp;
-using ClickUp.Constants;
-using ClickUp.Models.Response;
 using Newtonsoft.Json;
 using RestSharp;
 
-namespace ClickUp.Api;
+namespace Apps.ClickUp.Api;
 
 public class ClickUpClient : BlackBirdRestClient
 {

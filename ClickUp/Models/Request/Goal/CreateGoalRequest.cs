@@ -1,8 +1,8 @@
-﻿using Blackbird.Applications.Sdk.Common;
-using ClickUp.Utils.Converters;
+﻿using Apps.ClickUp.Utils.Converters;
+using Blackbird.Applications.Sdk.Common;
 using Newtonsoft.Json;
 
-namespace ClickUp.Models.Request.Goal;
+namespace Apps.ClickUp.Models.Request.Goal;
 
 public class CreateGoalRequest
 {

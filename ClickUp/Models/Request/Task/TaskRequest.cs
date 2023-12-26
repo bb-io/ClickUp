@@ -1,6 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Models.Request.Task;
+namespace Apps.ClickUp.Models.Request.Task;
 
 public class TaskRequest
 {

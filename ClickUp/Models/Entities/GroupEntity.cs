@@ -1,8 +1,8 @@
-﻿using Blackbird.Applications.Sdk.Common;
-using ClickUp.Utils.Converters;
+﻿using Apps.ClickUp.Utils.Converters;
+using Blackbird.Applications.Sdk.Common;
 using Newtonsoft.Json;
 
-namespace ClickUp.Models.Entities;
+namespace Apps.ClickUp.Models.Entities;
 
 public class GroupEntity
 {

@@ -1,6 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Models.Request.List;
+namespace Apps.ClickUp.Models.Request.List;
 
 public class ListRequest
 {
