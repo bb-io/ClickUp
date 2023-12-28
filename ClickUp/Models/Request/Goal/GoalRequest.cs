@@ -1,6 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Models.Request.Goal;
+namespace Apps.ClickUp.Models.Request.Goal;
 
 public class GoalRequest
 {

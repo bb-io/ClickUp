@@ -1,13 +1,13 @@
-﻿using Blackbird.Applications.Sdk.Common;
+﻿using Apps.ClickUp.Api;
+using Apps.ClickUp.Constants;
+using Apps.ClickUp.Models.Response.Team;
+using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 using Blackbird.Applications.Sdk.Common.Invocation;
-using ClickUp.Api;
-using ClickUp.Constants;
-using ClickUp.Models.Response.Team;
 using RestSharp;
 
-namespace ClickUp.DataSourceHandlers;
+namespace Apps.ClickUp.DataSourceHandlers;
 
 public class TeamDataHandler : BaseInvocable, IAsyncDataSourceHandler
 {

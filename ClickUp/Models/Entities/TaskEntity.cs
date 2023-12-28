@@ -1,10 +1,10 @@
-﻿using Blackbird.Applications.Sdk.Common;
-using ClickUp.Models.Entities.Base;
-using ClickUp.Models.Entities.Simple;
-using ClickUp.Utils.Converters;
+﻿using Apps.ClickUp.Models.Entities.Base;
+using Apps.ClickUp.Models.Entities.Simple;
+using Apps.ClickUp.Utils.Converters;
+using Blackbird.Applications.Sdk.Common;
 using Newtonsoft.Json;
 
-namespace ClickUp.Models.Entities;
+namespace Apps.ClickUp.Models.Entities;
 
 public class TaskEntity : ClickUpEntity
 {

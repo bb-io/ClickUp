@@ -1,17 +1,17 @@
-﻿using Blackbird.Applications.Sdk.Common;
+﻿using Apps.ClickUp.Actions.Base;
+using Apps.ClickUp.Api;
+using Apps.ClickUp.Constants;
+using Apps.ClickUp.Models.Entities;
+using Apps.ClickUp.Models.Request.Space;
+using Apps.ClickUp.Models.Request.Tag;
+using Apps.ClickUp.Models.Response.Tag;
+using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
-using ClickUp.Actions.Base;
-using ClickUp.Api;
-using ClickUp.Constants;
-using ClickUp.Models.Entities;
-using ClickUp.Models.Request.Space;
-using ClickUp.Models.Request.Tag;
-using ClickUp.Models.Response.Tag;
 using RestSharp;
 
-namespace ClickUp.Actions;
+namespace Apps.ClickUp.Actions;
 
 [ActionList]
 public class TagActions : ClickUpActions

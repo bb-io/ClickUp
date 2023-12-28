@@ -1,6 +1,6 @@
-﻿using ClickUp.Models.Entities;
+﻿using Apps.ClickUp.Models.Entities;
 
-namespace ClickUp.Models.Response.Task;
+namespace Apps.ClickUp.Models.Response.Task;
 
 public class ListTasksResponse
 {

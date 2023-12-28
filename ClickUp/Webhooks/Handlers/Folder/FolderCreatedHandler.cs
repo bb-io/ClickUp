@@ -1,7 +1,7 @@
-﻿using Blackbird.Applications.Sdk.Common.Webhooks;
-using ClickUp.Models.Request.Team;
+﻿using Apps.ClickUp.Models.Request.Team;
+using Blackbird.Applications.Sdk.Common.Webhooks;
 
-namespace ClickUp.Webhooks.Handlers.Folder;
+namespace Apps.ClickUp.Webhooks.Handlers.Folder;
 
 public class FolderCreatedHandler : BaseWebhookHandler
 {

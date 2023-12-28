@@ -1,10 +1,10 @@
-﻿using Blackbird.Applications.Sdk.Common;
+﻿using Apps.ClickUp.DataSourceHandlers.EnumHandlers;
+using Apps.ClickUp.Utils.Converters;
+using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
-using ClickUp.DataSourceHandlers.EnumHandlers;
-using ClickUp.Utils.Converters;
 using Newtonsoft.Json;
 
-namespace ClickUp.Models.Request.List;
+namespace Apps.ClickUp.Models.Request.List;
 
 public class CreateListRequest
 {

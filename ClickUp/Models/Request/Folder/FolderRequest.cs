@@ -1,6 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Models.Request.Folder;
+namespace Apps.ClickUp.Models.Request.Folder;
 
 public class FolderRequest
 {

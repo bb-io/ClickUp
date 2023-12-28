@@ -1,6 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Utils.Sdk.DataSourceHandlers;
 
-namespace ClickUp.DataSourceHandlers.EnumHandlers;
+namespace Apps.ClickUp.DataSourceHandlers.EnumHandlers;
 
 public class KeyResultTypeDataHandler : EnumDataHandler
 {

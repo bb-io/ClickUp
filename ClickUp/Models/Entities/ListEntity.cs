@@ -1,8 +1,8 @@
-﻿using Blackbird.Applications.Sdk.Common;
-using ClickUp.Models.Entities.Base;
-using ClickUp.Models.Entities.Simple;
+﻿using Apps.ClickUp.Models.Entities.Base;
+using Apps.ClickUp.Models.Entities.Simple;
+using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Models.Entities;
+namespace Apps.ClickUp.Models.Entities;
 
 public class ListEntity : ClickUpEntity
 {

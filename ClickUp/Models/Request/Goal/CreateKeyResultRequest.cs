@@ -1,8 +1,8 @@
-﻿using Blackbird.Applications.Sdk.Common;
+﻿using Apps.ClickUp.DataSourceHandlers.EnumHandlers;
+using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
-using ClickUp.DataSourceHandlers.EnumHandlers;
 
-namespace ClickUp.Models.Request.Goal;
+namespace Apps.ClickUp.Models.Request.Goal;
 
 public class CreateKeyResultRequest
 {

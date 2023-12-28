@@ -1,6 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Models.Entities.Simple;
+namespace Apps.ClickUp.Models.Entities.Simple;
 
 public class SimpleList
 {

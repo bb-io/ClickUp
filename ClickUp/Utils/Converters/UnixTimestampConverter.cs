@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ClickUp.Utils.Converters;
+namespace Apps.ClickUp.Utils.Converters;
 
 public class UnixTimestampConverter : JsonConverter
 {
