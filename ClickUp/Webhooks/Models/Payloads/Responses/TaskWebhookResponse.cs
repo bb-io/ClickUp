@@ -1,7 +1,7 @@
-﻿using Blackbird.Applications.Sdk.Common;
-using ClickUp.Webhooks.Models.Payloads.Base;
+﻿using Apps.ClickUp.Webhooks.Models.Payloads.Base;
+using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Webhooks.Models.Payloads.Responses;
+namespace Apps.ClickUp.Webhooks.Models.Payloads.Responses;
 
 public class TaskWebhookResponse : ClickUpWebhookResponse
 {

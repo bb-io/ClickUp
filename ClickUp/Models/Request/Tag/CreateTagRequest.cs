@@ -1,6 +1,6 @@
-﻿using ClickUp.Models.Entities;
+﻿using Apps.ClickUp.Models.Entities;
 
-namespace ClickUp.Models.Request.Tag;
+namespace Apps.ClickUp.Models.Request.Tag;
 
 public class CreateTagRequest
 {

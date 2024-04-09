@@ -1,6 +1,6 @@
 using Newtonsoft.Json.Linq;
 
-namespace ClickUp.Models.Response.Task;
+namespace Apps.ClickUp.Models.Response.Task;
 
 public class TaskCustomFieldsResponse
 {

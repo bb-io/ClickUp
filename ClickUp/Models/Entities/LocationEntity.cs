@@ -1,6 +1,6 @@
 using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Models.Entities;
+namespace Apps.ClickUp.Models.Entities;
 
 public class LocationEntity
 {

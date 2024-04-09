@@ -1,8 +1,8 @@
-﻿using Blackbird.Applications.Sdk.Common;
-using ClickUp.Utils.Converters;
+﻿using Apps.ClickUp.Utils.Converters;
+using Blackbird.Applications.Sdk.Common;
 using Newtonsoft.Json;
 
-namespace ClickUp.Webhooks.Models.Payloads.Additional;
+namespace Apps.ClickUp.Webhooks.Models.Payloads.Additional;
 
 public class HistoryItem
 {

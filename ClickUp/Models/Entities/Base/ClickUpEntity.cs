@@ -1,6 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Models.Entities.Base;
+namespace Apps.ClickUp.Models.Entities.Base;
 
 public class ClickUpEntity
 {

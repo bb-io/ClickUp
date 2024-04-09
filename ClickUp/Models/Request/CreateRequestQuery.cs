@@ -1,9 +1,9 @@
-﻿using Blackbird.Applications.Sdk.Common;
+﻿using Apps.ClickUp.DataSourceHandlers;
+using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
-using ClickUp.DataSourceHandlers;
 using Newtonsoft.Json;
 
-namespace ClickUp.Models.Request;
+namespace Apps.ClickUp.Models.Request;
 
 public class CreateRequestQuery
 {

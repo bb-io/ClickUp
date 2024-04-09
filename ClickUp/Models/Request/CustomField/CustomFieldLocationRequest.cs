@@ -1,4 +1,4 @@
-namespace ClickUp.Models.Request.CustomField;
+namespace Apps.ClickUp.Models.Request.CustomField;
 
 public class CustomFieldLocationRequest
 {

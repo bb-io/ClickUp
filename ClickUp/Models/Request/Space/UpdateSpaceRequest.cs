@@ -1,6 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Models.Request.Space;
+namespace Apps.ClickUp.Models.Request.Space;
 
 public class UpdateSpaceRequest
 {

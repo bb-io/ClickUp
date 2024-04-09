@@ -1,7 +1,7 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 using Newtonsoft.Json;
 
-namespace ClickUp.Models.Request.Group;
+namespace Apps.ClickUp.Models.Request.Group;
 
 public class ListGroupsQuery
 {

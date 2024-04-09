@@ -1,4 +1,4 @@
-﻿namespace ClickUp.Webhooks.Models.Payloads.Additional;
+﻿namespace Apps.ClickUp.Webhooks.Models.Payloads.Additional;
 
 public class Webhook
 {

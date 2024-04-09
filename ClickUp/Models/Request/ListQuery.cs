@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ClickUp.Models.Request;
+namespace Apps.ClickUp.Models.Request;
 
 public class ListQuery
 {

@@ -1,6 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Webhooks.Models.Payloads.Responses;
+namespace Apps.ClickUp.Webhooks.Models.Payloads.Responses;
 
 public class KeyResultWebhookResponse : GoalWebhookResponse
 {

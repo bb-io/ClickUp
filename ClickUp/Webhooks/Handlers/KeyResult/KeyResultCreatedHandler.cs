@@ -1,7 +1,7 @@
-﻿using Blackbird.Applications.Sdk.Common.Webhooks;
-using ClickUp.Models.Request.Team;
+﻿using Apps.ClickUp.Models.Request.Team;
+using Blackbird.Applications.Sdk.Common.Webhooks;
 
-namespace ClickUp.Webhooks.Handlers.KeyResult;
+namespace Apps.ClickUp.Webhooks.Handlers.KeyResult;
 
 public class KeyResultCreatedHandler : BaseWebhookHandler
 {

@@ -1,5 +1,5 @@
-﻿using ClickUp.Models.Entities;
+﻿using Apps.ClickUp.Models.Entities;
 
-namespace ClickUp.Models.Response.Goal;
+namespace Apps.ClickUp.Models.Response.Goal;
 
 public record ListGoalsResponse(GoalEntity[] Goals);

@@ -1,6 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 
-namespace ClickUp.Models.Request.Group;
+namespace Apps.ClickUp.Models.Request.Group;
 
 public class CreateGroupRequest
 {

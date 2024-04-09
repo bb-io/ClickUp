@@ -1,8 +1,8 @@
-﻿using Blackbird.Applications.Sdk.Common.Webhooks;
-using ClickUp.Constants;
+﻿using Apps.ClickUp.Constants;
+using Blackbird.Applications.Sdk.Common.Webhooks;
 using Newtonsoft.Json;
 
-namespace ClickUp.Webhooks.Lists.Base;
+namespace Apps.ClickUp.Webhooks.Lists.Base;
 
 public abstract class ClickUpWebhookList
 {

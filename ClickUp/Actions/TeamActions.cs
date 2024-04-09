@@ -1,12 +1,12 @@
-﻿using Blackbird.Applications.Sdk.Common.Actions;
+﻿using Apps.ClickUp.Actions.Base;
+using Apps.ClickUp.Api;
+using Apps.ClickUp.Constants;
+using Apps.ClickUp.Models.Response.Team;
+using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
-using ClickUp.Actions.Base;
-using ClickUp.Api;
-using ClickUp.Constants;
-using ClickUp.Models.Response.Team;
 using RestSharp;
 
-namespace ClickUp.Actions;
+namespace Apps.ClickUp.Actions;
 
 [ActionList]
 public class TeamActions : ClickUpActions

@@ -1,4 +1,4 @@
-﻿namespace ClickUp.Constants;
+﻿namespace Apps.ClickUp.Constants;
 
 public static class CredsNames
 {

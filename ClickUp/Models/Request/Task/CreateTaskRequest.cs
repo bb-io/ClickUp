@@ -1,11 +1,11 @@
-﻿using Blackbird.Applications.Sdk.Common;
+﻿using Apps.ClickUp.DataSourceHandlers.EnumHandlers;
+using Apps.ClickUp.Models.Entities.Simple;
+using Apps.ClickUp.Utils.Converters;
+using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
-using ClickUp.DataSourceHandlers.EnumHandlers;
-using ClickUp.Models.Entities.Simple;
-using ClickUp.Utils.Converters;
 using Newtonsoft.Json;
 
-namespace ClickUp.Models.Request.Task;
+namespace Apps.ClickUp.Models.Request.Task;
 
 public class CreateTaskRequest
 {

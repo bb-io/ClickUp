@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace ClickUp.Constants;
+namespace Apps.ClickUp.Constants;
 
 public static class JsonConfig
 {

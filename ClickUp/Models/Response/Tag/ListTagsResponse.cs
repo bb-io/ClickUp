@@ -1,5 +1,5 @@
-﻿using ClickUp.Models.Entities;
+﻿using Apps.ClickUp.Models.Entities;
 
-namespace ClickUp.Models.Response.Tag;
+namespace Apps.ClickUp.Models.Response.Tag;
 
 public record ListTagsResponse(TagEntity[] Tags);

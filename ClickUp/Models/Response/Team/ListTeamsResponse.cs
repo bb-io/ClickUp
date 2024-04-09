@@ -1,6 +1,6 @@
-﻿using ClickUp.Models.Entities;
+﻿using Apps.ClickUp.Models.Entities;
 
-namespace ClickUp.Models.Response.Team;
+namespace Apps.ClickUp.Models.Response.Team;
 
 public class ListTeamsResponse
 {

@@ -1,10 +1,10 @@
-﻿using Blackbird.Applications.Sdk.Common.Authentication;
+﻿using Apps.ClickUp.Api;
+using Apps.ClickUp.Constants;
+using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Connections;
-using ClickUp.Api;
-using ClickUp.Constants;
 using RestSharp;
 
-namespace ClickUp.Connections;
+namespace Apps.ClickUp.Connections;
 
 public class ConnectionValidator : IConnectionValidator
 {

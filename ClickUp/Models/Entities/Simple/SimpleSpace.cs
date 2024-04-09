@@ -1,4 +1,4 @@
-﻿namespace ClickUp.Models.Entities.Simple;
+﻿namespace Apps.ClickUp.Models.Entities.Simple;
 
 public class SimpleSpace
 {

@@ -1,6 +1,6 @@
-﻿using ClickUp.Models.Entities;
+﻿using Apps.ClickUp.Models.Entities;
 
-namespace ClickUp.Models.Response.List;
+namespace Apps.ClickUp.Models.Response.List;
 
 public record ListListsResponse
 {
