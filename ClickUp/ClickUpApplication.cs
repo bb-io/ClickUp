@@ -1,10 +1,17 @@
 ﻿using Blackbird.Applications.Sdk.Common;
+using Blackbird.Applications.Sdk.Common.Metadata;
 
 namespace Apps.ClickUp;
 
-public class ClickUpApplication : IApplication
+public class ClickUpApplication : IApplication, ICategoryProvider
 {
     private string _name;
+
+    public IEnumerable<ApplicationCategory> Categories
+    {
+        get => [ApplicationCategory.ProjectManagementAndProductivity, ApplicationCategory.TaskManagement];
+        set { }
+    }
 
     public ClickUpApplication()
     {
