@@ -24,8 +24,8 @@ public class CustomFieldDataHandler : ClickUpInvocable, IAsyncDataSourceHandler
     public async Task<Dictionary<string, string>> GetDataAsync(DataSourceContext context,
         CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(_request.TeamId))
-            throw new("You should specify Team ID first");
+        if (string.IsNullOrEmpty(_request.TaskId))
+            throw new("You should specify Task ID first");
 
         var request = new ClickUpRequest($"{ApiEndpoints.Tasks}/{_request.TaskId}/field", Method.Get, Creds);
         var teams = await Client.ExecuteWithErrorHandling<ListCustomFieldsResponse>(request);

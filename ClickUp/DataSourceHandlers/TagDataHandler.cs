@@ -23,8 +23,8 @@ public class TagDataHandler : ClickUpInvocable, IAsyncDataSourceHandler
     public async Task<Dictionary<string, string>> GetDataAsync(DataSourceContext context,
         CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(_request.TeamId))
-            throw new("You should specify Team ID first");
+        if (string.IsNullOrEmpty(_request.SpaceId))
+            throw new("You should specify Space ID first");
 
         var request = new ClickUpRequest($"{ApiEndpoints.Spaces}/{_request.SpaceId}/tag", Method.Get, Creds);
         var teams = await Client.ExecuteWithErrorHandling<ListTagsResponse>(request);
