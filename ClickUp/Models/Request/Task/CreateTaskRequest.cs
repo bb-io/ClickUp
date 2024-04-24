@@ -1,8 +1,8 @@
-﻿using Apps.ClickUp.DataSourceHandlers.EnumHandlers;
+﻿using Apps.ClickUp.DataSourceHandlers.Static;
 using Apps.ClickUp.Models.Entities.Simple;
 using Apps.ClickUp.Utils.Converters;
 using Blackbird.Applications.Sdk.Common;
-using Blackbird.Applications.Sdk.Common.Dynamic;
+using Blackbird.Applications.Sdk.Common.Dictionaries;
 using Newtonsoft.Json;
 
 namespace Apps.ClickUp.Models.Request.Task;
@@ -18,7 +18,7 @@ public class CreateTaskRequest
 
     public string? Status { get; set; }
 
-    [DataSource(typeof(TaskPriorityDataHandler))]
+    [StaticDataSource(typeof(TaskPriorityDataHandler))]
     public string? Priority { get; set; }
 
     [Display("Due date")]
@@ -48,7 +48,4 @@ public class CreateTaskRequest
 
     [Display("Check required custom fields")]
     public bool? CheckRequiredCustomFields { get; set; }
-
-    [Display("Custom fields")]
-    public IEnumerable<SimpleCustomField>? CustomFields { get; set; }
 }

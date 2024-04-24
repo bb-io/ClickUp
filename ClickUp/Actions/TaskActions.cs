@@ -58,8 +58,7 @@ public class TaskActions : ClickUpActions
     }
 
     [Action("Delete task", Description = "Delete specific task")]
-    public Task DeleteTask(
-        [ActionParameter] TaskRequest task)
+    public Task DeleteTask([ActionParameter] TaskRequest task)
     {
         var endpoint = $"{ApiEndpoints.Tasks}/{task.TaskId}";
         var request = new ClickUpRequest(endpoint, Method.Delete, Creds);

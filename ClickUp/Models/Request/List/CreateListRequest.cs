@@ -1,7 +1,7 @@
-﻿using Apps.ClickUp.DataSourceHandlers.EnumHandlers;
+﻿using Apps.ClickUp.DataSourceHandlers.Static;
 using Apps.ClickUp.Utils.Converters;
 using Blackbird.Applications.Sdk.Common;
-using Blackbird.Applications.Sdk.Common.Dynamic;
+using Blackbird.Applications.Sdk.Common.Dictionaries;
 using Newtonsoft.Json;
 
 namespace Apps.ClickUp.Models.Request.List;
@@ -19,7 +19,7 @@ public class CreateListRequest
     [Display("Due date time")]
     public bool? DueDateTime { get; set; }
     
-    [DataSource(typeof(TaskPriorityDataHandler))]
+    [StaticDataSource(typeof(TaskPriorityDataHandler))]
     public string? Priority { get; set; }
     
     [Display("Assignee ID")]
