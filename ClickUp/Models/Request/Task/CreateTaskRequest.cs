@@ -1,5 +1,4 @@
 ﻿using Apps.ClickUp.DataSourceHandlers.Static;
-using Apps.ClickUp.Models.Entities.Simple;
 using Apps.ClickUp.Utils.Converters;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dictionaries;

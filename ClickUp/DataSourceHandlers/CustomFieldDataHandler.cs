@@ -3,7 +3,6 @@ using Apps.ClickUp.Constants;
 using Apps.ClickUp.Invocables;
 using Apps.ClickUp.Models.Request.CustomField;
 using Apps.ClickUp.Models.Response.CusomField;
-using Apps.ClickUp.Models.Response.Tag;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -24,10 +23,10 @@ public class CustomFieldDataHandler : ClickUpInvocable, IAsyncDataSourceHandler
     public async Task<Dictionary<string, string>> GetDataAsync(DataSourceContext context,
         CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(_request.TaskId))
-            throw new("You should specify Task ID first");
+        if (string.IsNullOrEmpty(_request.ListId))
+            throw new("You should specify List ID first");
 
-        var request = new ClickUpRequest($"{ApiEndpoints.Tasks}/{_request.TaskId}/field", Method.Get, Creds);
+        var request = new ClickUpRequest($"{ApiEndpoints.Lists}/{_request.ListId}/field", Method.Get, Creds);
         var teams = await Client.ExecuteWithErrorHandling<ListCustomFieldsResponse>(request);
 
         return teams.Fields
