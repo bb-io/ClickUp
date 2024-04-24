@@ -27,6 +27,7 @@ public class SpaceDataHandler : ClickUpInvocable, IAsyncDataSourceHandler
         var teams = await Client.ExecuteWithErrorHandling<ListSpacesResponse>(request);
 
         return teams.Spaces
+            .Where(x => x.Name != null)
             .Where(x => context.SearchString is null ||
                         x.Name.Contains(context.SearchString, StringComparison.OrdinalIgnoreCase))
             .Take(20)
