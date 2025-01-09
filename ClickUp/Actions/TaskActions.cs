@@ -57,6 +57,20 @@ public class TaskActions : ClickUpActions
         return Client.ExecuteWithErrorHandling<TaskEntity>(request);
     }
 
+
+    [Action("Update task", Description = "Update the details of a specific task")]
+    public Task<TaskEntity> UpdateTask(
+        [ActionParameter] TaskRequest task,
+        [ActionParameter] CreateRequestQuery query,
+        [ActionParameter] UpdateTaskRequest requestBody)
+    {
+        var endpoint = $"{ApiEndpoints.Tasks}/{task.TaskId}";
+        var request = new ClickUpRequest(endpoint.WithQuery(query), Method.Put, Creds)
+            .WithJsonBody(requestBody, JsonConfig.Settings);
+
+        return Client.ExecuteWithErrorHandling<TaskEntity>(request);
+    }
+
     [Action("Delete task", Description = "Delete specific task")]
     public Task DeleteTask(
         [ActionParameter] TaskRequest task)
