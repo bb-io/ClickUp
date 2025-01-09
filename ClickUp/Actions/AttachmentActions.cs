@@ -57,4 +57,21 @@ public class AttachmentActions : ClickUpActions
         return new AttachmentsResponse { Attachments = attachments };
     }
 
+    [Action("Download attachment", Description = "Download attachment from ID")]
+    public async Task<DownloadAttachmentResponse> DownloadAttachment([ActionParameter] DownloadAttachmentRequest attachmentRequest)
+    {
+
+        var request = new ClickUpRequest(attachmentRequest.AttachmentURL, Method.Get, Creds);
+
+        var response = await Client.ExecuteWithHandling(request);
+
+        var filename = response.ContentHeaders.First(h => h.Name == "Content-Disposition").Value.ToString()
+            .Split(';')[1].Split('=')[1].Trim('"');
+
+        var contentType = response.ContentHeaders.First(h => h.Name == "Content-Type").Value.ToString();
+
+        using var stream = new MemoryStream(response.RawBytes);
+        var file = await _fileManagementClient.UploadAsync(stream, contentType, filename);
+        return new DownloadAttachmentResponse { Attachment = file };
+    }
 }
