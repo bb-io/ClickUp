@@ -12,6 +12,10 @@ using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 using Blackbird.Applications.Sdk.Utils.Extensions.String;
 using RestSharp;
 using Method = RestSharp.Method;
+using Apps.ClickUp.Models.Request.Task;
+using System.Threading.Tasks;
+using Apps.ClickUp.Models.Response.Attachment;
+using System.Net.Mail;
 
 namespace Apps.ClickUp.Actions;
 
@@ -39,4 +43,18 @@ public class AttachmentActions : ClickUpActions
             
         return await Client.ExecuteWithErrorHandling<AttachmentEntity>(request);
     }
+
+    [Action("Get Attachments from task", Description = "Get attachment list from tasks")]
+    public async Task<AttachmentsResponse> GetAttachment([ActionParameter] GetAttachmentRequest attachmentRequest)
+    {
+        var endpoint = $"{ApiEndpoints.Tasks}/{attachmentRequest.TaskId}";
+        var request = new ClickUpRequest(endpoint, Method.Get, Creds);
+        
+        var result = await Client.ExecuteWithErrorHandling<TaskEntity>(request);
+
+        
+        var attachments = result?.Attachments?.Where((a) => a.Id == attachmentRequest.AttachmentId).ToList();
+        return new AttachmentsResponse { Attachments = attachments };
+    }
+
 }
