@@ -14,7 +14,7 @@ using RestSharp;
 
 namespace Apps.ClickUp.Actions;
 
-[ActionList]
+[ActionList("User group")]
 public class UserGroupActions : ClickUpActions
 {
     public UserGroupActions(InvocationContext invocationContext) : base(invocationContext)

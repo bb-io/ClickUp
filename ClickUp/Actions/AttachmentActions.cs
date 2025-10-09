@@ -15,7 +15,7 @@ using Method = RestSharp.Method;
 
 namespace Apps.ClickUp.Actions;
 
-[ActionList]
+[ActionList("Attachment")]
 public class AttachmentActions : ClickUpActions
 {
     private readonly IFileManagementClient _fileManagementClient;
