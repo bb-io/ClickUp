@@ -14,7 +14,7 @@ using RestSharp;
 
 namespace Apps.ClickUp.Actions;
 
-[ActionList]
+[ActionList("Custom field")]
 public class CustomFieldActions : ClickUpActions
 {
     public CustomFieldActions(InvocationContext invocationContext) : base(invocationContext)

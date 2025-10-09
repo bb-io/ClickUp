@@ -15,7 +15,7 @@ using RestSharp;
 
 namespace Apps.ClickUp.Actions;
 
-[ActionList]
+[ActionList("Folder")]
 public class FolderActions : ClickUpActions
 {
     public FolderActions(InvocationContext invocationContext) : base(invocationContext)

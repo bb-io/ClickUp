@@ -1,6 +1,6 @@
-﻿using Apps.ClickUp.DataSourceHandlers.EnumHandlers;
+﻿using Apps.ClickUp.DataSourceHandlers.Static;
 using Blackbird.Applications.Sdk.Common;
-using Blackbird.Applications.Sdk.Common.Dynamic;
+using Blackbird.Applications.Sdk.Common.Dictionaries;
 
 namespace Apps.ClickUp.Models.Request.Goal;
 
@@ -9,7 +9,7 @@ public class CreateKeyResultRequest
     public string Name { get; set; }
     public IEnumerable<string>? Owners { get; set; }
     
-    [DataSource(typeof(KeyResultTypeDataHandler))]
+    [StaticDataSource(typeof(KeyResultTypeDataHandler))]
     public string Type { get; set; }
     
     [Display("Steps start")]

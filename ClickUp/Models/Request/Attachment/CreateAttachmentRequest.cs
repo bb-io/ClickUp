@@ -5,9 +5,6 @@ namespace Apps.ClickUp.Models.Request.Attachment;
 
 public class CreateAttachmentRequest
 {
-    [Display("Task ID")]
-    public string TaskId { get; set; }
-    
     public FileReference File { get; set; }
     
     [Display("File name")]
