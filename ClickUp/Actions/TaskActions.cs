@@ -19,7 +19,7 @@ using RestSharp;
 
 namespace Apps.ClickUp.Actions;
 
-[ActionList]
+[ActionList("Task")]
 public class TaskActions : ClickUpActions
 {
     public TaskActions(InvocationContext invocationContext) : base(invocationContext)

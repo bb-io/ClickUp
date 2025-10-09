@@ -13,7 +13,7 @@ using RestSharp;
 
 namespace Apps.ClickUp.Actions;
 
-[ActionList]
+[ActionList("Tag")]
 public class TagActions : ClickUpActions
 {
     public TagActions(InvocationContext invocationContext) : base(invocationContext)

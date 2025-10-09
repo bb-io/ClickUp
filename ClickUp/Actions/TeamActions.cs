@@ -8,7 +8,7 @@ using RestSharp;
 
 namespace Apps.ClickUp.Actions;
 
-[ActionList]
+[ActionList("Team")]
 public class TeamActions : ClickUpActions
 {
     public TeamActions(InvocationContext invocationContext) : base(invocationContext)

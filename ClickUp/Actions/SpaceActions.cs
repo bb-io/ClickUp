@@ -15,7 +15,7 @@ using RestSharp;
 
 namespace Apps.ClickUp.Actions;
 
-[ActionList]
+[ActionList("Space")]
 public class SpaceActions : ClickUpActions
 {
     public SpaceActions(InvocationContext invocationContext) : base(invocationContext)
