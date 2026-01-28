@@ -21,7 +21,7 @@ public class GoalActions : ClickUpActions
     {
     }
     
-    [Action("Get goals", Description = "Get all goals")]
+    [Action("Search goals", Description = "Get all goals")]
     public Task<ListGoalsResponse> GetGoals(
         [ActionParameter] TeamRequest team,
         [ActionParameter] ListGoalsQuery query)

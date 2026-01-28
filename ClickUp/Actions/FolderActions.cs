@@ -22,7 +22,7 @@ public class FolderActions : ClickUpActions
     {
     }
     
-    [Action("Get folders", Description = "Get all folders given a specific space")]
+    [Action("Search folders", Description = "Get all folders given a specific space")]
     public Task<ListFoldersResponse> GetFolders(
         [ActionParameter] SpaceRequest space,
         [ActionParameter] ListQuery query)

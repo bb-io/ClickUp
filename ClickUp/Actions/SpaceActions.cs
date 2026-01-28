@@ -22,7 +22,7 @@ public class SpaceActions : ClickUpActions
     {
     }
 
-    [Action("Get spaces", Description = "Get all spaces given a specific team")]
+    [Action("Search spaces", Description = "Get all spaces given a specific team")]
     public Task<ListSpacesResponse> GetSpaces(
         [ActionParameter] TeamRequest team,
         [ActionParameter] ListQuery query)
