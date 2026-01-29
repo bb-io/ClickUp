@@ -6,7 +6,7 @@ namespace Apps.ClickUp.Webhooks.Handlers.Tasks.DataHandlers
 {
     internal class ListWebhookDataHandler : ListDataHandler
     {
-        public ListWebhookDataHandler(InvocationContext invocationContext, [WebhookParameter] WebhookScopeRequest request) :
+        public ListWebhookDataHandler(InvocationContext invocationContext,WebhookScopeRequest request) :
         base(invocationContext, request.FolderId)
         {
 

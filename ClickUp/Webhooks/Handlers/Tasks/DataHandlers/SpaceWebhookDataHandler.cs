@@ -6,7 +6,7 @@ namespace Apps.ClickUp.Webhooks.Handlers.Tasks.DataHandlers
 {
     public class SpaceWebhookDataHandler : SpaceDataHandler
     {
-        public SpaceWebhookDataHandler(InvocationContext invocationContext, [WebhookParameter] WebhookScopeRequest request) :
+        public SpaceWebhookDataHandler(InvocationContext invocationContext, WebhookScopeRequest request) :
         base(invocationContext, request.TeamId)
         {
 
