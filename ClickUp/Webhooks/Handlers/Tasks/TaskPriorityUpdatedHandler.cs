@@ -7,7 +7,7 @@ public class TaskPriorityUpdatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "taskPriorityUpdated";
 
-    public TaskPriorityUpdatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public TaskPriorityUpdatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

@@ -7,7 +7,7 @@ public class SpaceUpdatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "spaceUpdated";
 
-    public SpaceUpdatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public SpaceUpdatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

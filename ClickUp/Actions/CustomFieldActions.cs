@@ -21,7 +21,7 @@ public class CustomFieldActions : ClickUpActions
     {
     }
 
-    [Action("List custom fields", Description = "List all accessible custom fields")]
+    [Action("Search custom fields", Description = "List all accessible custom fields")]
     public Task<ListCustomFieldsResponse> ListCustomFields([ActionParameter] ListRequest list)
     {
         var endpoint = $"{ApiEndpoints.Lists}/{list.ListId}{ApiEndpoints.CustomFields}";

@@ -21,7 +21,7 @@ public class UserGroupActions : ClickUpActions
     {
     }
     
-    [Action("Get user groups", Description = "Get all user groups")]
+    [Action("Search user groups", Description = "Get all user groups")]
     public Task<ListGroupsResponse> GetGroups([ActionParameter] ListGroupsQuery query)
     {
         var endpoint = ApiEndpoints.Groups;

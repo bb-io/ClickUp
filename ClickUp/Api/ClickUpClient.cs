@@ -1,5 +1,6 @@
 ﻿using Apps.ClickUp.Constants;
 using Apps.ClickUp.Models.Response;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Utils.Extensions.String;
 using Blackbird.Applications.Sdk.Utils.RestSharp;
 using Newtonsoft.Json;
@@ -15,19 +16,33 @@ public class ClickUpClient : BlackBirdRestClient
     })
     {
     }
-    
-    public new async Task<T> ExecuteWithErrorHandling<T>(RestRequest request)
-    {
-        var response = await ExecuteWithErrorHandling(request);
-        var json = response.Content!;
 
-        return JsonConvert.DeserializeObject<T>(json, JsonConfig.Settings) ??
-               throw new($"Could not parse {json} to {typeof(T)}");
+    public async Task<T> ExecuteWithErrorHandling<T>(RestRequest request)
+    {
+        string content = (await ExecuteWithErrorHandling(request)).Content;
+        T val = JsonConvert.DeserializeObject<T>(content);
+        if (val == null)
+        {
+            throw new Exception($"Could not parse {content} to {typeof(T)}");
+        }
+
+        return val;
+    }
+
+    public async Task<RestResponse> ExecuteWithErrorHandling(RestRequest request)
+    {
+        RestResponse restResponse = await ExecuteAsync(request);
+        if (!restResponse.IsSuccessStatusCode)
+        {
+            throw ConfigureErrorException(restResponse);
+        }
+
+        return restResponse;
     }
 
     protected override Exception ConfigureErrorException(RestResponse response)
     {
-        var error = JsonConvert.DeserializeObject<Error>(response.Content);
-        return new(error.Err);
+        var error = JsonConvert.DeserializeObject(response.Content);
+        throw new PluginApplicationException($"{error}");
     }
 }

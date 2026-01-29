@@ -7,7 +7,7 @@ public class TaskDueDateUpdatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "taskDueDateUpdated";
 
-    public TaskDueDateUpdatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public TaskDueDateUpdatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

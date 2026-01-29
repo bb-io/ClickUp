@@ -20,7 +20,7 @@ public class TagActions : ClickUpActions
     {
     }
 
-    [Action("Get tags", Description = "Get all space tags")]
+    [Action("Search tags", Description = "Get all space tags")]
     public Task<ListTagsResponse> GetTags([ActionParameter] SpaceRequest space)
     {
         var endpoint = $"{ApiEndpoints.Spaces}/{space.SpaceId}{ApiEndpoints.Tags}";

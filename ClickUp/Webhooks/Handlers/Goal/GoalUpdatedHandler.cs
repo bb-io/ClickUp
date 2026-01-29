@@ -7,7 +7,7 @@ public class GoalUpdatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "goalUpdated";
 
-    public GoalUpdatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public GoalUpdatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

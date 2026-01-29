@@ -7,7 +7,7 @@ public class TaskDeletedHandler : BaseWebhookHandler
 {
     protected override string EventType => "taskDeleted";
 
-    public TaskDeletedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public TaskDeletedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

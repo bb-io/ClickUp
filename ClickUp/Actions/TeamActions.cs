@@ -15,7 +15,7 @@ public class TeamActions : ClickUpActions
     {
     }
     
-    [Action("Get teams", Description = "Get all teams for this user connection")]
+    [Action("Search teams", Description = "Get all teams for this user connection")]
     public Task<ListTeamsResponse> GetTeams()
     {
         var request = new ClickUpRequest(ApiEndpoints.Teams, Method.Get, Creds);

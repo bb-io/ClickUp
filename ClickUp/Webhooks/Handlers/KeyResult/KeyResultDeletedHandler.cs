@@ -7,7 +7,7 @@ public class KeyResultDeletedHandler : BaseWebhookHandler
 {
     protected override string EventType => "keyResultDeleted";
 
-    public KeyResultDeletedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public KeyResultDeletedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }
