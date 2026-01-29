@@ -7,7 +7,7 @@ public class SpaceDeletedHandler : BaseWebhookHandler
 {
     protected override string EventType => "spaceDeleted";
 
-    public SpaceDeletedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public SpaceDeletedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

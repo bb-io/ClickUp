@@ -7,7 +7,7 @@ public class GoalCreatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "goalCreated";
 
-    public GoalCreatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public GoalCreatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

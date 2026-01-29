@@ -7,7 +7,7 @@ public class ListCreatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "listCreated";
 
-    public ListCreatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public ListCreatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

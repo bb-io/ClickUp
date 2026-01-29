@@ -7,7 +7,7 @@ public class GoalDeletedHandler : BaseWebhookHandler
 {
     protected override string EventType => "goalDeleted";
 
-    public GoalDeletedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public GoalDeletedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

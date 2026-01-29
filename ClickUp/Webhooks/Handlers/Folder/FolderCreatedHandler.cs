@@ -7,7 +7,7 @@ public class FolderCreatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "folderCreated";
 
-    public FolderCreatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public FolderCreatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

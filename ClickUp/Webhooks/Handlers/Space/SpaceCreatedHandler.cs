@@ -7,7 +7,7 @@ public class SpaceCreatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "spaceCreated";
 
-    public SpaceCreatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public SpaceCreatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

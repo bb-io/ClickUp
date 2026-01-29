@@ -1,6 +1,5 @@
 ﻿using Apps.ClickUp.Api;
 using Apps.ClickUp.Constants;
-using Apps.ClickUp.Models.Request.Team;
 using Apps.ClickUp.Webhooks.Models.Payloads.Additional;
 using Apps.ClickUp.Webhooks.Models.Request;
 using Blackbird.Applications.Sdk.Common.Authentication;
@@ -14,12 +13,14 @@ public abstract class BaseWebhookHandler : IWebhookEventHandler
 {
     protected abstract string EventType { get; }
     private string TeamId { get; }
-    
+    protected WebhookScopeRequest Scope { get; }
+
     private ClickUpClient Client { get; }
 
-    public BaseWebhookHandler([WebhookParameter] TeamRequest input)
+    public BaseWebhookHandler([WebhookParameter] WebhookScopeRequest input)
     {
         TeamId = input.TeamId;
+        Scope = input;
         Client = new();
     }
 
@@ -30,6 +31,8 @@ public abstract class BaseWebhookHandler : IWebhookEventHandler
             Endpoint = values["payloadUrl"],
             Events = new List<string> { EventType }
         };
+
+        ApplyScope(payload, Scope);
 
         var endpoint = $"{ApiEndpoints.Teams}/{TeamId}{ApiEndpoints.Webhooks}";
         var request = new ClickUpRequest(endpoint, Method.Post, creds)
@@ -43,13 +46,13 @@ public abstract class BaseWebhookHandler : IWebhookEventHandler
         var allWebhooks = await GetAllWebhooks(creds);
         var currentHook = allWebhooks.Webhooks
             .FirstOrDefault(x => x.Endpoint == values["payloadUrl"]);
-        
+
         if (currentHook == null)
             return;
 
         var endpoint = $"{ApiEndpoints.Webhooks}/{currentHook.Id}";
         var request = new ClickUpRequest(endpoint, Method.Delete, creds);
-        
+
         await Client.ExecuteWithErrorHandling(request);
     }
 
@@ -57,7 +60,43 @@ public abstract class BaseWebhookHandler : IWebhookEventHandler
     {
         var endpoint = $"{ApiEndpoints.Teams}/{TeamId}{ApiEndpoints.Webhooks}";
         var request = new ClickUpRequest(endpoint, Method.Get, creds);
-        
+
         return Client.ExecuteWithErrorHandling<WebhooksResponse>(request);
     }
+
+    private static void ApplyScope(AddWebhookRequest payload, WebhookScopeRequest scope)
+    {
+        var taskId = Normalize(scope.TaskId);
+        if (!string.IsNullOrWhiteSpace(taskId))
+        {
+            payload.TaskId = taskId;
+            return;
+        }
+
+        var listId = TryParseLong(scope.ListId);
+        if (listId.HasValue)
+        {
+            payload.ListId = listId.Value;
+            return;
+        }
+
+        var folderId = TryParseLong(scope.FolderId);
+        if (folderId.HasValue)
+        {
+            payload.FolderId = folderId.Value;
+            return;
+        }
+
+        var spaceId = TryParseLong(scope.SpaceId);
+        if (spaceId.HasValue)
+        {
+            payload.SpaceId = spaceId.Value;
+        }
+    }
+
+    private static long? TryParseLong(string? value)
+        => long.TryParse(value?.Trim(), out var v) ? v : null;
+
+    private static string? Normalize(string? value)
+        => string.IsNullOrWhiteSpace(value) ? null : value.Trim();
 }

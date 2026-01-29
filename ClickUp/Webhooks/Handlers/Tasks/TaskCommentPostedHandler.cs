@@ -7,7 +7,7 @@ public class TaskCommentPostedHandler : BaseWebhookHandler
 {
     protected override string EventType => "taskCommentPosted";
 
-    public TaskCommentPostedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public TaskCommentPostedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

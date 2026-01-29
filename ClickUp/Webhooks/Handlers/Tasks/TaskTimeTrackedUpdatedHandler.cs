@@ -7,7 +7,7 @@ public class TaskTimeTrackedUpdatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "taskTimeTrackedUpdated";
 
-    public TaskTimeTrackedUpdatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public TaskTimeTrackedUpdatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

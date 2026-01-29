@@ -7,7 +7,7 @@ public class FolderDeletedHandler : BaseWebhookHandler
 {
     protected override string EventType => "folderDeleted";
 
-    public FolderDeletedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public FolderDeletedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

@@ -7,7 +7,7 @@ public class FolderUpdatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "folderUpdated";
 
-    public FolderUpdatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public FolderUpdatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

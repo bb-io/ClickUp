@@ -7,7 +7,7 @@ public class KeyResultCreatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "keyResultCreated";
 
-    public KeyResultCreatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public KeyResultCreatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

@@ -7,7 +7,7 @@ public class ListDeletedHandler : BaseWebhookHandler
 {
     protected override string EventType => "listDeleted";
 
-    public ListDeletedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public ListDeletedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

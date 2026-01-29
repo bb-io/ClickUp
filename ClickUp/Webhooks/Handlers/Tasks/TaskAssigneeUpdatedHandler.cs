@@ -7,7 +7,7 @@ public class TaskAssigneeUpdatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "taskAssigneeUpdated";
 
-    public TaskAssigneeUpdatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public TaskAssigneeUpdatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

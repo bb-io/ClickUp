@@ -7,7 +7,7 @@ public class TaskCreatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "taskCreated";
 
-    public TaskCreatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public TaskCreatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

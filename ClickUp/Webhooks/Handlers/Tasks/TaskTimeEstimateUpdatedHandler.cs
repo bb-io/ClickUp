@@ -7,7 +7,7 @@ public class TaskTimeEstimateUpdatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "taskTimeEstimateUpdated";
 
-    public TaskTimeEstimateUpdatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public TaskTimeEstimateUpdatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }

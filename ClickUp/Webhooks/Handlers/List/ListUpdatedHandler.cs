@@ -7,7 +7,7 @@ public class ListUpdatedHandler : BaseWebhookHandler
 {
     protected override string EventType => "listUpdated";
 
-    public ListUpdatedHandler([WebhookParameter] TeamRequest team) : base(team)
+    public ListUpdatedHandler([WebhookParameter] WebhookScopeRequest team) : base(team)
     {
     }
 }
