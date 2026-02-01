@@ -47,4 +47,8 @@ public class TaskEntity : ClickUpEntity
     public int? TimeSpent { get; set; }
     
     public SimpleList List { get; set; }
+
+    [Display("Attachments")]
+
+    public List<AttachmentEntity> Attachments { get; set; }
 }

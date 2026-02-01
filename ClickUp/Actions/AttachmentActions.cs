@@ -12,6 +12,10 @@ using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Blackbird.Applications.Sdk.Utils.Extensions.String;
 using RestSharp;
 using Method = RestSharp.Method;
+using Apps.ClickUp.Models.Request.Task;
+using System.Threading.Tasks;
+using Apps.ClickUp.Models.Response.Attachment;
+using System.Net.Mail;
 
 namespace Apps.ClickUp.Actions;
 
@@ -43,5 +47,36 @@ public class AttachmentActions : ClickUpActions
             .AddFile("attachment", () => file, input.FileName ?? input.File.Name);
 
         return await Client.ExecuteWithErrorHandling<AttachmentEntity>(request);
+    }
+
+    [Action("Get Attachments from task", Description = "Get attachment list from tasks")]
+    public async Task<AttachmentsResponse> GetAttachment([ActionParameter] GetAttachmentRequest attachmentRequest)
+    {
+        var endpoint = $"{ApiEndpoints.Tasks}/{attachmentRequest.TaskId}";
+        var request = new ClickUpRequest(endpoint, Method.Get, Creds);
+        
+        var result = await Client.ExecuteWithErrorHandling<TaskEntity>(request);
+
+        
+        var attachments = result?.Attachments?.Where((a) => a.Id == attachmentRequest.AttachmentId).ToList();
+        return new AttachmentsResponse { Attachments = attachments };
+    }
+
+    [Action("Download attachment", Description = "Download attachment from ID")]
+    public async Task<DownloadAttachmentResponse> DownloadAttachment([ActionParameter] DownloadAttachmentRequest attachmentRequest)
+    {
+
+        var request = new ClickUpRequest(attachmentRequest.AttachmentURL, Method.Get, Creds);
+
+        var response = await Client.ExecuteWithHandling(request);
+
+        var filename = response.ContentHeaders.First(h => h.Name == "Content-Disposition").Value.ToString()
+            .Split(';')[1].Split('=')[1].Trim('"');
+
+        var contentType = response.ContentHeaders.First(h => h.Name == "Content-Type").Value.ToString();
+
+        using var stream = new MemoryStream(response.RawBytes);
+        var file = await _fileManagementClient.UploadAsync(stream, contentType, filename);
+        return new DownloadAttachmentResponse { Attachment = file };
     }
 }

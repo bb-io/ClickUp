@@ -40,6 +40,16 @@ public class ClickUpClient : BlackBirdRestClient
         return restResponse;
     }
 
+    public async Task<RestResponse> ExecuteWithHandling(RestRequest request)
+    {
+        var response = await ExecuteAsync(request);
+
+        if (response.IsSuccessful)
+            return response;
+
+        throw ConfigureErrorException(response);
+    }
+
     protected override Exception ConfigureErrorException(RestResponse response)
     {
         var error = JsonConvert.DeserializeObject(response.Content);

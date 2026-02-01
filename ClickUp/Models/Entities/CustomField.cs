@@ -22,5 +22,5 @@ public class CustomField
 
     public bool Required { get; set; }
 
-    public List<string> Value { get; set; }
+    public string Value { get; set; }
 }
