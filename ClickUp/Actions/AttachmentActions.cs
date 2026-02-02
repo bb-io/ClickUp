@@ -12,6 +12,7 @@ using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Blackbird.Applications.Sdk.Utils.Extensions.String;
 using RestSharp;
 using Method = RestSharp.Method;
+using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 
 namespace Apps.ClickUp.Actions;
 
@@ -37,7 +38,7 @@ public class AttachmentActions : ClickUpActions
         var endpoint = $"{ApiEndpoints.Tasks}/{task.TaskId}{ApiEndpoints.Attachments}".WithQuery(query);
 
         if (query.CustomTaskIds is true)
-            endpoint = endpoint.SetQueryParameter("team_id", task.TeamId);
+            endpoint = endpoint.SetQueryParameter("team_id", InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Team).Value);
 
         var request = new ClickUpRequest(endpoint, Method.Post, Creds)
             .AddFile("attachment", () => file, input.FileName ?? input.File.Name);

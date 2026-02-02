@@ -10,16 +10,8 @@ namespace Apps.ClickUp.Models.Request.CustomField;
 
 public class CustomFieldRequest
 {
-    [Display("Team")]
-    [DataSource(typeof(TeamDataHandler))]
-    public string TeamId { get; set; }
-
-    [Display("Space ID")]
-    [DataSource(typeof(SpaceCustomFieldDataHandler))]
-    public string SpaceId { get; set; }
-
     [Display("Folder ID")]
-    [DataSource(typeof(FolderCustomFieldDataHandler))]
+    [DataSource(typeof(FolderDataHandler))]
     public string FolderId { get; set; }
     
     [Display("List ID")]

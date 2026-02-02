@@ -11,6 +11,7 @@ using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
+using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using Blackbird.Applications.Sdk.Utils.Extensions.String;
 using RestSharp;
 
@@ -24,11 +25,9 @@ public class ListActions : ClickUpActions
     }
 
     [Action("Get lists from space", Description = "Get all lists given a specific space")]
-    public Task<ListListsResponse> GetListsFromSpace(
-        [ActionParameter] SpaceRequest space,
-        [ActionParameter] ListQuery query)
+    public Task<ListListsResponse> GetListsFromSpace([ActionParameter] ListQuery query)
     {
-        var endpoint = $"{ApiEndpoints.Spaces}/{space.SpaceId}{ApiEndpoints.Lists}";
+        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value}{ApiEndpoints.Lists}";
         var request = new ClickUpRequest(endpoint.WithQuery(query), Method.Get, Creds);
         
         return Client.ExecuteWithErrorHandling<ListListsResponse>(request);
@@ -58,11 +57,9 @@ public class ListActions : ClickUpActions
     }
 
     [Action("Create space list", Description = "Create a new space list")]
-    public Task<ListEntity> CreateSpaceList(
-        [ActionParameter] SpaceRequest space,
-        [ActionParameter] CreateListRequest body)
+    public Task<ListEntity> CreateSpaceList([ActionParameter] CreateListRequest body)
     {
-        var endpoint = $"{ApiEndpoints.Spaces}/{space.SpaceId}{ApiEndpoints.Lists}";
+        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value}{ApiEndpoints.Lists}";
         var request = new ClickUpRequest(endpoint, Method.Post, Creds)
             .WithJsonBody(body, JsonConfig.Settings);
         

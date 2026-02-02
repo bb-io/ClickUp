@@ -7,7 +7,7 @@ namespace Apps.ClickUp.DataSourceHandlers.Folder;
 public class FolderCustomFieldDataHandler : FolderDataHandler
 {
     public FolderCustomFieldDataHandler(InvocationContext invocationContext, [ActionParameter] CustomFieldRequest request) :
-        base(invocationContext, request.SpaceId)
+        base(invocationContext)
     {
     }
 }

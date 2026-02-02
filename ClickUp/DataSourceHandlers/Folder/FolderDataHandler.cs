@@ -4,6 +4,7 @@ using Apps.ClickUp.Invocables;
 using Apps.ClickUp.Models.Response.Folder;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 using Blackbird.Applications.Sdk.Common.Invocation;
+using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using RestSharp;
 
 namespace Apps.ClickUp.DataSourceHandlers.Folder;
@@ -12,9 +13,9 @@ public class FolderDataHandler : ClickUpInvocable, IAsyncDataSourceHandler
 {
     private readonly string _spaceId;
 
-    public FolderDataHandler(InvocationContext invocationContext, string spaceId) : base(invocationContext)
+    public FolderDataHandler(InvocationContext invocationContext) : base(invocationContext)
     {
-        _spaceId = spaceId;
+        _spaceId = invocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value;
     }
 
     public async Task<Dictionary<string, string>> GetDataAsync(DataSourceContext context,

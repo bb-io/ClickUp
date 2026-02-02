@@ -9,6 +9,7 @@ using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
+using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using RestSharp;
 
 namespace Apps.ClickUp.Actions;
@@ -21,25 +22,23 @@ public class TagActions : ClickUpActions
     }
 
     [Action("Search tags", Description = "Get all space tags")]
-    public Task<ListTagsResponse> GetTags([ActionParameter] SpaceRequest space)
+    public Task<ListTagsResponse> GetTags()
     {
-        var endpoint = $"{ApiEndpoints.Spaces}/{space.SpaceId}{ApiEndpoints.Tags}";
+        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value}{ApiEndpoints.Tags}";
         var request = new ClickUpRequest(endpoint, Method.Get, Creds);
 
         return Client.ExecuteWithErrorHandling<ListTagsResponse>(request);
     }
 
     [Action("Create tag", Description = "Create a new space tag")]
-    public async Task<TagEntity> CreateTag(
-        [ActionParameter] SpaceRequest space,
-        [ActionParameter] CreateTagInput input)
+    public async Task<TagEntity> CreateTag([ActionParameter] CreateTagInput input)
     {
-        var endpoint = $"{ApiEndpoints.Spaces}/{space.SpaceId}{ApiEndpoints.Tags}";
+        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value}{ApiEndpoints.Tags}";
         var request = new ClickUpRequest(endpoint, Method.Post, Creds)
             .WithJsonBody(new CreateTagRequest(input), JsonConfig.Settings);
 
         await Client.ExecuteWithErrorHandling(request);
-        var allTags = await GetTags(space);
+        var allTags = await GetTags();
 
         return allTags.Tags.First(x => x.Name == input.Name);
     }

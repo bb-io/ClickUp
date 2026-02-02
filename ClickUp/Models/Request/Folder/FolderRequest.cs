@@ -8,15 +8,7 @@ namespace Apps.ClickUp.Models.Request.Folder;
 
 public class FolderRequest
 {
-    [Display("Team")]
-    [DataSource(typeof(TeamDataHandler))]
-    public string TeamId { get; set; }
-
-    [Display("Space ID")]
-    [DataSource(typeof(SpaceFolderDataHandler))]
-    public string SpaceId { get; set; }
-
     [Display("Folder ID")]
-    [DataSource(typeof(PrimaryFolderDataHandler))]
+    [DataSource(typeof(FolderDataHandler))]
     public string FolderId { get; set; }
 }

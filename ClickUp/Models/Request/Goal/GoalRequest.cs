@@ -6,10 +6,6 @@ namespace Apps.ClickUp.Models.Request.Goal;
 
 public class GoalRequest
 {
-    [Display("Team")]
-    [DataSource(typeof(TeamDataHandler))]
-    public string TeamId { get; set; }
-
     [Display("Goal ID")] 
     [DataSource(typeof(GoalDataHandler))]
     public string GoalId { get; set; }

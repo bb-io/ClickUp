@@ -9,6 +9,7 @@ using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
+using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using Blackbird.Applications.Sdk.Utils.Extensions.String;
 using RestSharp;
 
@@ -22,22 +23,18 @@ public class GoalActions : ClickUpActions
     }
     
     [Action("Search goals", Description = "Get all goals")]
-    public Task<ListGoalsResponse> GetGoals(
-        [ActionParameter] TeamRequest team,
-        [ActionParameter] ListGoalsQuery query)
+    public Task<ListGoalsResponse> GetGoals([ActionParameter] ListGoalsQuery query)
     {
-        var endpoint = $"{ApiEndpoints.Teams}/{team.TeamId}{ApiEndpoints.Goals}";
+        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Team)}{ApiEndpoints.Goals}";
         var request = new ClickUpRequest(endpoint.WithQuery(query), Method.Get, Creds);
         
         return Client.ExecuteWithErrorHandling<ListGoalsResponse>(request);
     }
     
     [Action("Create goal", Description = "Create a new goal")]
-    public async Task<GoalEntity> CreateGoal(
-        [ActionParameter] TeamRequest team,
-        [ActionParameter] CreateGoalRequest input)
+    public async Task<GoalEntity> CreateGoal([ActionParameter] CreateGoalRequest input)
     {
-        var endpoint = $"{ApiEndpoints.Teams}/{team.TeamId}{ApiEndpoints.Goals}";
+        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Team)}{ApiEndpoints.Goals}";
         var request = new ClickUpRequest(endpoint, Method.Post, Creds)
             .WithJsonBody(input, JsonConfig.Settings);
         

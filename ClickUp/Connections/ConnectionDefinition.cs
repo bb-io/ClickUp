@@ -15,19 +15,13 @@ public class ConnectionDefinition : IConnectionDefinition
             ConnectionUsage = ConnectionUsage.Actions,
             ConnectionProperties = new List<ConnectionProperty>()
             {
-                new(CredsNames.Token) { DisplayName = "Token", Sensitive=true }
+                new(CredsNames.Token) { DisplayName = "Token", Sensitive=true },
+                new(CredsNames.Team) { DisplayName = "Team ID", Sensitive=false },
+                new(CredsNames.Space) { DisplayName = "Space ID", Sensitive=false }
             }
         }
     };
 
     public IEnumerable<AuthenticationCredentialsProvider> CreateAuthorizationCredentialsProviders(
-        Dictionary<string, string> values)
-    {
-        var token = values.First(v => v.Key == CredsNames.Token);
-        yield return new AuthenticationCredentialsProvider(
-            AuthenticationCredentialsRequestLocation.Header,
-            token.Key,
-            token.Value
-        );
-    }
+       Dictionary<string, string> values) => values.Select(x => new AuthenticationCredentialsProvider(x.Key, x.Value)).ToList();
 }

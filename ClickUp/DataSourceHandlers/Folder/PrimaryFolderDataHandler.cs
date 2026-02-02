@@ -7,7 +7,7 @@ namespace Apps.ClickUp.DataSourceHandlers.Folder;
 public class PrimaryFolderDataHandler : FolderDataHandler
 {
     public PrimaryFolderDataHandler(InvocationContext invocationContext, [ActionParameter] FolderRequest request) :
-        base(invocationContext, request.SpaceId)
+        base(invocationContext)
     {
     }
 }

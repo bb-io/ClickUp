@@ -9,6 +9,7 @@ using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
+using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using Blackbird.Applications.Sdk.Utils.Extensions.String;
 using RestSharp;
 
@@ -31,11 +32,9 @@ public class UserGroupActions : ClickUpActions
     }      
     
     [Action("Create user group", Description = "Create a new user group")]
-    public Task<GroupEntity> CreateGroup(
-        [ActionParameter] TeamRequest team,
-        [ActionParameter] CreateGroupRequest input)
+    public Task<GroupEntity> CreateGroup([ActionParameter] CreateGroupRequest input)
     {
-        var endpoint = $"{ApiEndpoints.Teams}/{team.TeamId}{ApiEndpoints.Groups}";
+        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Team).Value}{ApiEndpoints.Groups}";
         var request = new ClickUpRequest(endpoint, Method.Post, Creds)
             .WithJsonBody(input, JsonConfig.Settings);
         
