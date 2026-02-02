@@ -47,7 +47,7 @@ ClickUp project management software that allows you to plan, track and collabora
 ### Spaces
 
 - **Search spaces** returns all spaces of specified `team`.
-- **Get/create/update/delete space**
+- **Get/create/update space**
 
 ### Tags
 
