@@ -16,6 +16,10 @@ ClickUp project management software that allows you to plan, track and collabora
 4.  Go to ClickUp personal settings and click _Apps_.
 5.  Click _Generate_ under the _API Token_ label
 6.  Copy API token and paste it to the appropriate field in the BlackBird
+7.  Input Team ID you are working under. You can find it in your URL
+	 ![example1](ClickUp/image/clickup-team-id.png)
+8.  Input Space ID you are working under. You can find it in your URL
+	 ![example2](ClickUp/image/clickup-space-id.png)
 7.  Click _Connect_.
 8.  Confirm that the connection has appeared and the status is _Connected_.
 
