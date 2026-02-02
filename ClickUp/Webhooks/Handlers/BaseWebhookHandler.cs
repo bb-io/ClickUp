@@ -15,9 +15,8 @@ namespace Apps.ClickUp.Webhooks.Handlers;
 public abstract class BaseWebhookHandler(InvocationContext invocationContext, [WebhookParameter] WebhookScopeRequest input) : ClickUpInvocable(invocationContext), IWebhookEventHandler
 {
     protected abstract string EventType { get; }
-    protected WebhookScopeRequest Scope { get; }
-
-    private ClickUpClient Client { get; }
+    protected WebhookScopeRequest Scope { get; } = input;
+    private ClickUpClient Client { get; } = new();
 
     public Task SubscribeAsync(IEnumerable<AuthenticationCredentialsProvider> creds, Dictionary<string, string> values)
     {
