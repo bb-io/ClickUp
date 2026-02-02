@@ -1,6 +1,4 @@
 ﻿using Apps.ClickUp.DataSourceHandlers;
-using Apps.ClickUp.DataSourceHandlers.Folder;
-using Apps.ClickUp.DataSourceHandlers.Space;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 

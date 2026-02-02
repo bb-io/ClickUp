@@ -6,27 +6,28 @@ using Apps.ClickUp.Models.Response.Tag;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 using Blackbird.Applications.Sdk.Common.Invocation;
+using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using RestSharp;
 
 namespace Apps.ClickUp.DataSourceHandlers;
 
 public class TagDataHandler : ClickUpInvocable, IAsyncDataSourceHandler
 {
-    private readonly TagRequest _request;
+    private readonly string _spaceId;
 
-    public TagDataHandler(InvocationContext invocationContext, [ActionParameter] TagRequest request) : base(
+    public TagDataHandler(InvocationContext invocationContext) : base(
         invocationContext)
     {
-        _request = request;
+        _spaceId = InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value;
     }
 
     public async Task<Dictionary<string, string>> GetDataAsync(DataSourceContext context,
         CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(_request.SpaceId))
+        if (string.IsNullOrEmpty(_spaceId))
             throw new("You should specify Space ID first");
 
-        var request = new ClickUpRequest($"{ApiEndpoints.Spaces}/{_request.SpaceId}/tag", Method.Get, Creds);
+        var request = new ClickUpRequest($"{ApiEndpoints.Spaces}/{_spaceId}/tag", Method.Get, Creds);
         var teams = await Client.ExecuteWithErrorHandling<ListTagsResponse>(request);
 
         return teams.Tags

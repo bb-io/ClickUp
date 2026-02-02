@@ -1,5 +1,4 @@
-﻿using Apps.ClickUp.Models.Request.Team;
-using Blackbird.Applications.Sdk.Common.Invocation;
+﻿using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Common.Webhooks;
 
 namespace Apps.ClickUp.Webhooks.Handlers.Folder;

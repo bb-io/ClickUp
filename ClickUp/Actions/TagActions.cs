@@ -46,7 +46,7 @@ public class TagActions : ClickUpActions
     [Action("Delete tag", Description = "Delete specific space tag")]
     public Task DeleteTag([ActionParameter] TagRequest tag)
     {
-        var endpoint = $"{ApiEndpoints.Spaces}/{tag.SpaceId}{ApiEndpoints.Tags}/{tag.TagName}";
+        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value}{ApiEndpoints.Tags}/{tag.TagName}";
         var request = new ClickUpRequest(endpoint, Method.Delete, Creds);
 
         return Client.ExecuteWithErrorHandling(request);

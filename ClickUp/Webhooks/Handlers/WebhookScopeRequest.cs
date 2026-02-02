@@ -1,5 +1,4 @@
 ﻿using Apps.ClickUp.DataSourceHandlers;
-using Apps.ClickUp.DataSourceHandlers.Folder;
 using Apps.ClickUp.Webhooks.Handlers.Tasks.DataHandlers;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;

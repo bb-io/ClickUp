@@ -41,7 +41,7 @@ public class SpaceActions : ClickUpActions
         return Client.ExecuteWithErrorHandling<SpaceEntity>(request);
     }
 
-    [Action("Update space", Description = "Update specific space")]
+    [Action("Update space", Description = "Update space")]
     public Task<SpaceEntity> UpdateSpace([ActionParameter] UpdateSpaceRequest input)
     {
         var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value}";
@@ -51,23 +51,12 @@ public class SpaceActions : ClickUpActions
         return Client.ExecuteWithErrorHandling<SpaceEntity>(request);
     }
 
-    [Action("Get space", Description = "Get details of a specific space")]
-    public Task<SpaceEntity> GetSpace(
-        [ActionParameter] SpaceRequest space)
+    [Action("Get space", Description = "Get details of a  space")]
+    public Task<SpaceEntity> GetSpace()
     {
-        var endpoint = $"{ApiEndpoints.Spaces}/{space.SpaceId}";
+        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value}";
         var request = new ClickUpRequest(endpoint, Method.Get, Creds);
 
         return Client.ExecuteWithErrorHandling<SpaceEntity>(request);
-    }
-
-    [Action("Delete space", Description = "Delete specific space")]
-    public Task DeleteSpace(
-        [ActionParameter] SpaceRequest space)
-    {
-        var endpoint = $"{ApiEndpoints.Spaces}/{space.SpaceId}";
-        var request = new ClickUpRequest(endpoint, Method.Delete, Creds);
-
-        return Client.ExecuteWithErrorHandling(request);
     }
 }

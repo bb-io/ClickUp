@@ -7,7 +7,7 @@ using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using RestSharp;
 
-namespace Apps.ClickUp.DataSourceHandlers.Folder;
+namespace Apps.ClickUp.DataSourceHandlers;
 
 public class FolderDataHandler : ClickUpInvocable, IAsyncDataSourceHandler
 {

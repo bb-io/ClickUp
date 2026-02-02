@@ -4,17 +4,18 @@ using Apps.ClickUp.Invocables;
 using Apps.ClickUp.Models.Response.Space;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 using Blackbird.Applications.Sdk.Common.Invocation;
+using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using RestSharp;
 
-namespace Apps.ClickUp.DataSourceHandlers.Space;
+namespace Apps.ClickUp.DataSourceHandlers;
 
 public class SpaceDataHandler : ClickUpInvocable, IAsyncDataSourceHandler
 {
     private readonly string _teamId;
 
-    public SpaceDataHandler(InvocationContext invocationContext, string teamId) : base(invocationContext)
+    public SpaceDataHandler(InvocationContext invocationContext) : base(invocationContext)
     {
-        _teamId = teamId;
+        _teamId = InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Team).Value;
     }
 
     public async Task<Dictionary<string, string>> GetDataAsync(DataSourceContext context,
