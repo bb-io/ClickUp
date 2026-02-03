@@ -16,12 +16,8 @@ using RestSharp;
 namespace Apps.ClickUp.Actions;
 
 [ActionList("User group")]
-public class UserGroupActions : ClickUpActions
+public class UserGroupActions(InvocationContext invocationContext) : ClickUpActions(invocationContext)
 {
-    public UserGroupActions(InvocationContext invocationContext) : base(invocationContext)
-    {
-    }
-
     [Action("Search user groups", Description = "Get all user groups")]
     public Task<ListGroupsResponse> GetGroups([ActionParameter] ListGroupsQuery query)
     {

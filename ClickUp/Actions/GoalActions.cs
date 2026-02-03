@@ -16,12 +16,8 @@ using RestSharp;
 namespace Apps.ClickUp.Actions;
 
 [ActionList("Goal")]
-public class GoalActions : ClickUpActions
+public class GoalActions(InvocationContext invocationContext) : ClickUpActions(invocationContext)
 {
-    public GoalActions(InvocationContext invocationContext) : base(invocationContext)
-    {
-    }
-
     [Action("Search goals", Description = "Get all goals")]
     public Task<ListGoalsResponse> GetGoals([ActionParameter] ListGoalsQuery query)
     {

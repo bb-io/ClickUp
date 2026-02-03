@@ -1,6 +1,7 @@
 ﻿using Apps.ClickUp.Api;
 using Apps.ClickUp.Constants;
 using Apps.ClickUp.Invocables;
+using Apps.ClickUp.Utils;
 using Apps.ClickUp.Webhooks.Models.Payloads.Additional;
 using Apps.ClickUp.Webhooks.Models.Request;
 using Blackbird.Applications.Sdk.Common.Authentication;
@@ -28,7 +29,7 @@ public abstract class BaseWebhookHandler(InvocationContext invocationContext, [W
 
         ApplyScope(payload, Scope);
 
-        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Team).Value}{ApiEndpoints.Webhooks}";
+        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.GetTeamId()}{ApiEndpoints.Webhooks}";
         var request = new ClickUpRequest(endpoint, Method.Post, creds)
             .WithJsonBody(payload, JsonConfig.Settings);
 
@@ -52,7 +53,7 @@ public abstract class BaseWebhookHandler(InvocationContext invocationContext, [W
 
     private Task<WebhooksResponse> GetAllWebhooks(IEnumerable<AuthenticationCredentialsProvider> creds)
     {
-        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Team).Value}{ApiEndpoints.Webhooks}";
+        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.GetTeamId()}{ApiEndpoints.Webhooks}";
         var request = new ClickUpRequest(endpoint, Method.Get, creds);
 
         return Client.ExecuteWithErrorHandling<WebhooksResponse>(request);
@@ -81,7 +82,7 @@ public abstract class BaseWebhookHandler(InvocationContext invocationContext, [W
             return;
         }
 
-        var spaceId = TryParseLong(InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value);
+        var spaceId = TryParseLong(InvocationContext.GetSpaceId());
         if (spaceId.HasValue)
         {
             payload.SpaceId = spaceId.Value;

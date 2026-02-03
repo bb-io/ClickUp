@@ -5,17 +5,13 @@ using Apps.ClickUp.Models.Response.Space;
 using Apps.ClickUp.Utils;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 using Blackbird.Applications.Sdk.Common.Invocation;
-using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using RestSharp;
 
 namespace Apps.ClickUp.DataSourceHandlers;
 
-public class SpaceDataHandler : ClickUpInvocable, IAsyncDataSourceHandler
+public class SpaceDataHandler(InvocationContext invocationContext)
+    : ClickUpInvocable(invocationContext), IAsyncDataSourceHandler
 {
-    public SpaceDataHandler(InvocationContext invocationContext) : base(invocationContext)
-    {
-    }
-
     public async Task<Dictionary<string, string>> GetDataAsync(DataSourceContext context,
         CancellationToken cancellationToken)
     {
@@ -29,4 +25,4 @@ public class SpaceDataHandler : ClickUpInvocable, IAsyncDataSourceHandler
             .Take(20)
             .ToDictionary(x => x.Id, x => x.Name);
     }
-}
+}³

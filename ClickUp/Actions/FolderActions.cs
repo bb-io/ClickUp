@@ -16,12 +16,8 @@ using RestSharp;
 namespace Apps.ClickUp.Actions;
 
 [ActionList("Folder")]
-public class FolderActions : ClickUpActions
+public class FolderActions(InvocationContext invocationContext) : ClickUpActions(invocationContext)
 {
-    public FolderActions(InvocationContext invocationContext) : base(invocationContext)
-    {
-    }
-
     [Action("Search folders", Description = "Get all folders given a specific space")]
     public Task<ListFoldersResponse> GetFolders([ActionParameter] ListQuery query)
     {
