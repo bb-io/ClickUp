@@ -1,5 +1,4 @@
 ﻿using Apps.ClickUp.DataSourceHandlers.Task;
-using Apps.ClickUp.Models.Request.Task;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Invocation;
 

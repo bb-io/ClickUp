@@ -7,16 +7,8 @@ namespace Apps.ClickUp.Webhooks.Handlers
 {
     public class WebhookScopeRequest
     {
-        [Display("Team")]
-        [DataSource(typeof(TeamDataHandler))]
-        public string TeamId { get; set; }
-
-        [Display("Space ID")]
-        [DataSource(typeof(SpaceWebhookDataHandler))]
-        public string? SpaceId { get; set; }
-
         [Display("Folder ID")]
-        [DataSource(typeof(FolderWebhookDataHandler))]
+        [DataSource(typeof(FolderDataHandler))]
         public string? FolderId { get; set; }
 
         [Display("List ID")]

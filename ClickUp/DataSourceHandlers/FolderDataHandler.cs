@@ -2,28 +2,20 @@ using Apps.ClickUp.Api;
 using Apps.ClickUp.Constants;
 using Apps.ClickUp.Invocables;
 using Apps.ClickUp.Models.Response.Folder;
+using Apps.ClickUp.Utils;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using RestSharp;
 
-namespace Apps.ClickUp.DataSourceHandlers.Folder;
+namespace Apps.ClickUp.DataSourceHandlers;
 
-public class FolderDataHandler : ClickUpInvocable, IAsyncDataSourceHandler
+public class FolderDataHandler(InvocationContext invocationContext)
+    : ClickUpInvocable(invocationContext), IAsyncDataSourceHandler
 {
-    private readonly string _spaceId;
-
-    public FolderDataHandler(InvocationContext invocationContext, string spaceId) : base(invocationContext)
-    {
-        _spaceId = spaceId;
-    }
-
     public async Task<Dictionary<string, string>> GetDataAsync(DataSourceContext context,
         CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(_spaceId))
-            throw new("You should specify Space ID first");
-
-        var request = new ClickUpRequest($"{ApiEndpoints.Spaces}/{_spaceId}/folder", Method.Get, Creds);
+        var request = new ClickUpRequest($"{ApiEndpoints.Spaces}/{InvocationContext.GetSpaceId()}/folder", Method.Get, Creds);
         var teams = await Client.ExecuteWithErrorHandling<ListFoldersResponse>(request);
 
         return teams.Folders

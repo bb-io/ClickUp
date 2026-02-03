@@ -4,8 +4,8 @@ using Apps.ClickUp.Constants;
 using Apps.ClickUp.Models.Entities;
 using Apps.ClickUp.Models.Request;
 using Apps.ClickUp.Models.Request.Folder;
-using Apps.ClickUp.Models.Request.Space;
 using Apps.ClickUp.Models.Response.Folder;
+using Apps.ClickUp.Utils;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -16,50 +16,42 @@ using RestSharp;
 namespace Apps.ClickUp.Actions;
 
 [ActionList("Folder")]
-public class FolderActions : ClickUpActions
+public class FolderActions(InvocationContext invocationContext) : ClickUpActions(invocationContext)
 {
-    public FolderActions(InvocationContext invocationContext) : base(invocationContext)
-    {
-    }
-    
     [Action("Search folders", Description = "Get all folders given a specific space")]
-    public Task<ListFoldersResponse> GetFolders(
-        [ActionParameter] SpaceRequest space,
-        [ActionParameter] ListQuery query)
+    public Task<ListFoldersResponse> GetFolders([ActionParameter] ListQuery query)
     {
-        var endpoint = $"{ApiEndpoints.Spaces}/{space.SpaceId}{ApiEndpoints.Folders}";
+        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.GetSpaceId()}{ApiEndpoints.Folders}";
         var request = new ClickUpRequest(endpoint.WithQuery(query), Method.Get, Creds);
-        
+
         return Client.ExecuteWithErrorHandling<ListFoldersResponse>(request);
     }
-    
+
     [Action("Create folder", Description = "Create a new folder")]
-    public Task<FolderEntity> CreateFolder(
-        [ActionParameter] SpaceRequest space,
-        [ActionParameter] CreateFolderRequest input)
+    public Task<FolderEntity> CreateFolder([ActionParameter] CreateFolderRequest input)
     {
-        var endpoint = $"{ApiEndpoints.Spaces}/{space.SpaceId}{ApiEndpoints.Folders}";
+        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.GetSpaceId()}{ApiEndpoints.Folders}";
         var request = new ClickUpRequest(endpoint, Method.Post, Creds)
             .WithJsonBody(input, JsonConfig.Settings);
-        
+
         return Client.ExecuteWithErrorHandling<FolderEntity>(request);
     }
-    
+
     [Action("Get folder", Description = "Get specific folder details")]
     public Task<FolderEntity> GetFolder([ActionParameter] FolderRequest folder)
     {
         var endpoint = $"{ApiEndpoints.Folders}/{folder.FolderId}";
         var request = new ClickUpRequest(endpoint, Method.Get, Creds);
-        
+
         return Client.ExecuteWithErrorHandling<FolderEntity>(request);
     }
-    
+
     [Action("Delete folder", Description = "Delete specific folder")]
     public Task DeleteFolder([ActionParameter] FolderRequest folder)
     {
         var endpoint = $"{ApiEndpoints.Folders}/{folder.FolderId}";
         var request = new ClickUpRequest(endpoint, Method.Delete, Creds);
-        
+
         return Client.ExecuteWithErrorHandling(request);
     }
 }

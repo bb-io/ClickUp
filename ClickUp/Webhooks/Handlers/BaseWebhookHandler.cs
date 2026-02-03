@@ -1,28 +1,22 @@
 ﻿using Apps.ClickUp.Api;
 using Apps.ClickUp.Constants;
+using Apps.ClickUp.Invocables;
+using Apps.ClickUp.Utils;
 using Apps.ClickUp.Webhooks.Models.Payloads.Additional;
 using Apps.ClickUp.Webhooks.Models.Request;
 using Blackbird.Applications.Sdk.Common.Authentication;
+using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Common.Webhooks;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 using RestSharp;
 
 namespace Apps.ClickUp.Webhooks.Handlers;
 
-public abstract class BaseWebhookHandler : IWebhookEventHandler
+public abstract class BaseWebhookHandler(InvocationContext invocationContext, [WebhookParameter] WebhookScopeRequest input) : ClickUpInvocable(invocationContext), IWebhookEventHandler
 {
     protected abstract string EventType { get; }
-    private string TeamId { get; }
-    protected WebhookScopeRequest Scope { get; }
-
-    private ClickUpClient Client { get; }
-
-    public BaseWebhookHandler([WebhookParameter] WebhookScopeRequest input)
-    {
-        TeamId = input.TeamId;
-        Scope = input;
-        Client = new();
-    }
+    protected WebhookScopeRequest Scope { get; } = input;
+    private ClickUpClient Client { get; } = new();
 
     public Task SubscribeAsync(IEnumerable<AuthenticationCredentialsProvider> creds, Dictionary<string, string> values)
     {
@@ -34,7 +28,7 @@ public abstract class BaseWebhookHandler : IWebhookEventHandler
 
         ApplyScope(payload, Scope);
 
-        var endpoint = $"{ApiEndpoints.Teams}/{TeamId}{ApiEndpoints.Webhooks}";
+        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.GetTeamId()}{ApiEndpoints.Webhooks}";
         var request = new ClickUpRequest(endpoint, Method.Post, creds)
             .WithJsonBody(payload, JsonConfig.Settings);
 
@@ -58,13 +52,13 @@ public abstract class BaseWebhookHandler : IWebhookEventHandler
 
     private Task<WebhooksResponse> GetAllWebhooks(IEnumerable<AuthenticationCredentialsProvider> creds)
     {
-        var endpoint = $"{ApiEndpoints.Teams}/{TeamId}{ApiEndpoints.Webhooks}";
+        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.GetTeamId()}{ApiEndpoints.Webhooks}";
         var request = new ClickUpRequest(endpoint, Method.Get, creds);
 
         return Client.ExecuteWithErrorHandling<WebhooksResponse>(request);
     }
 
-    private static void ApplyScope(AddWebhookRequest payload, WebhookScopeRequest scope)
+    private void ApplyScope(AddWebhookRequest payload, WebhookScopeRequest scope)
     {
         var taskId = Normalize(scope.TaskId);
         if (!string.IsNullOrWhiteSpace(taskId))
@@ -87,7 +81,7 @@ public abstract class BaseWebhookHandler : IWebhookEventHandler
             return;
         }
 
-        var spaceId = TryParseLong(scope.SpaceId);
+        var spaceId = TryParseLong(InvocationContext.GetSpaceId());
         if (spaceId.HasValue)
         {
             payload.SpaceId = spaceId.Value;
