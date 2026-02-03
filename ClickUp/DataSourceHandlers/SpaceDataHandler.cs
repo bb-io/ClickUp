@@ -25,4 +25,4 @@ public class SpaceDataHandler(InvocationContext invocationContext)
             .Take(20)
             .ToDictionary(x => x.Id, x => x.Name);
     }
-}³
+}
