@@ -5,6 +5,7 @@ using Apps.ClickUp.Models.Entities;
 using Apps.ClickUp.Models.Request.Space;
 using Apps.ClickUp.Models.Request.Tag;
 using Apps.ClickUp.Models.Response.Tag;
+using Apps.ClickUp.Utils;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -24,7 +25,7 @@ public class TagActions : ClickUpActions
     [Action("Search tags", Description = "Get all space tags")]
     public Task<ListTagsResponse> GetTags()
     {
-        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value}{ApiEndpoints.Tags}";
+        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.GetSpaceId()}{ApiEndpoints.Tags}";
         var request = new ClickUpRequest(endpoint, Method.Get, Creds);
 
         return Client.ExecuteWithErrorHandling<ListTagsResponse>(request);
@@ -33,7 +34,7 @@ public class TagActions : ClickUpActions
     [Action("Create tag", Description = "Create a new space tag")]
     public async Task<TagEntity> CreateTag([ActionParameter] CreateTagInput input)
     {
-        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value}{ApiEndpoints.Tags}";
+        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.GetSpaceId()}{ApiEndpoints.Tags}";
         var request = new ClickUpRequest(endpoint, Method.Post, Creds)
             .WithJsonBody(new CreateTagRequest(input), JsonConfig.Settings);
 
@@ -46,7 +47,7 @@ public class TagActions : ClickUpActions
     [Action("Delete tag", Description = "Delete specific space tag")]
     public Task DeleteTag([ActionParameter] TagRequest tag)
     {
-        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value}{ApiEndpoints.Tags}/{tag.TagName}";
+        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.GetSpaceId()}{ApiEndpoints.Tags}/{tag.TagName}";
         var request = new ClickUpRequest(endpoint, Method.Delete, Creds);
 
         return Client.ExecuteWithErrorHandling(request);

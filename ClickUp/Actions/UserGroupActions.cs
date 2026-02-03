@@ -4,6 +4,7 @@ using Apps.ClickUp.Constants;
 using Apps.ClickUp.Models.Entities;
 using Apps.ClickUp.Models.Request.Group;
 using Apps.ClickUp.Models.Response.Group;
+using Apps.ClickUp.Utils;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -33,7 +34,7 @@ public class UserGroupActions : ClickUpActions
     [Action("Create user group", Description = "Create a new user group")]
     public Task<GroupEntity> CreateGroup([ActionParameter] CreateGroupRequest input)
     {
-        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Team).Value}{ApiEndpoints.Groups}";
+        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.GetTeamId()}{ApiEndpoints.Groups}";
         var request = new ClickUpRequest(endpoint, Method.Post, Creds)
             .WithJsonBody(input, JsonConfig.Settings);
 

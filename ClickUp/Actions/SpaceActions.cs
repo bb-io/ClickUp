@@ -5,6 +5,7 @@ using Apps.ClickUp.Models.Entities;
 using Apps.ClickUp.Models.Request;
 using Apps.ClickUp.Models.Request.Space;
 using Apps.ClickUp.Models.Response.Space;
+using Apps.ClickUp.Utils;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -25,7 +26,7 @@ public class SpaceActions : ClickUpActions
     [Action("Search spaces", Description = "Get all spaces given a specific team")]
     public Task<ListSpacesResponse> GetSpaces([ActionParameter] ListQuery query)
     {
-        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Team).Value}{ApiEndpoints.Spaces}";
+        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.GetTeamId()}{ApiEndpoints.Spaces}";
         var request = new ClickUpRequest(endpoint.WithQuery(query), Method.Get, Creds);
 
         return Client.ExecuteWithErrorHandling<ListSpacesResponse>(request);
@@ -34,7 +35,7 @@ public class SpaceActions : ClickUpActions
     [Action("Create space", Description = "Create a new space")]
     public Task<SpaceEntity> CreateSpace([ActionParameter] CreateSpaceRequest input)
     {
-        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Team).Value}{ApiEndpoints.Spaces}";
+        var endpoint = $"{ApiEndpoints.Teams}/{InvocationContext.GetTeamId()}{ApiEndpoints.Spaces}";
         var request = new ClickUpRequest(endpoint, Method.Post, Creds)
             .WithJsonBody(input, JsonConfig.Settings);
 
@@ -44,7 +45,7 @@ public class SpaceActions : ClickUpActions
     [Action("Update space", Description = "Update space")]
     public Task<SpaceEntity> UpdateSpace([ActionParameter] UpdateSpaceRequest input)
     {
-        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value}";
+        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.GetSpaceId()}";
         var request = new ClickUpRequest(endpoint, Method.Put, Creds)
             .WithJsonBody(input, JsonConfig.Settings);
 
@@ -54,7 +55,7 @@ public class SpaceActions : ClickUpActions
     [Action("Get space", Description = "Get details of a  space")]
     public Task<SpaceEntity> GetSpace()
     {
-        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.AuthenticationCredentialsProviders.Get(CredsNames.Space).Value}";
+        var endpoint = $"{ApiEndpoints.Spaces}/{InvocationContext.GetSpaceId()}";
         var request = new ClickUpRequest(endpoint, Method.Get, Creds);
 
         return Client.ExecuteWithErrorHandling<SpaceEntity>(request);
