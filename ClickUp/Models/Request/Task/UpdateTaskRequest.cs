@@ -35,7 +35,7 @@ public class UpdateTaskRequest
     [Display("Due date")]
     public DateTime? DueDate { get; set; }
 
-    [Display("Time estimate")]
+    [Display("Time estimate (hours)")]
     public int? TimeEstimate { get; set; }
 
     [Display("Start date")]

@@ -69,7 +69,7 @@ public class TaskActions : ClickUpActions
             Priority = input.Priority,
             DueDate = input.DueDate,
             DueDateTime = GetTimeFlag(input.DueDate),
-            TimeEstimate = input.TimeEstimate,
+            TimeEstimate = GetTimeEstimate(input.TimeEstimate),
             StartDate = input.StartDate,
             StartDateTime = GetTimeFlag(input.StartDate),
             Parent = input.Parent
@@ -172,6 +172,9 @@ public class TaskActions : ClickUpActions
 
     private static bool? GetTimeFlag(DateTime? value)
         => value.HasValue ? value.Value.TimeOfDay != TimeSpan.Zero : null;
+
+    private static int? GetTimeEstimate(int? value)
+        => value.HasValue ? checked(value.Value * 60 * 60 * 1000) : null;
 
     #endregion
 }
