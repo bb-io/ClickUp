@@ -57,6 +57,30 @@ public class TaskActions : ClickUpActions
         return Client.ExecuteWithErrorHandling<TaskEntity>(request);
     }
 
+    [Action("Update task", Description = "Update a specific task")]
+    public Task<TaskEntity> UpdateTask([ActionParameter] UpdateTaskRequest input)
+    {
+        var endpoint = $"{ApiEndpoints.Tasks}/{input.TaskId}";
+        var requestBody = new UpdateTaskPayload
+        {
+            Name = input.Name,
+            Description = input.Description,
+            Status = input.Status,
+            Priority = input.Priority,
+            DueDate = input.DueDate,
+            DueDateTime = GetTimeFlag(input.DueDate),
+            TimeEstimate = input.TimeEstimate,
+            StartDate = input.StartDate,
+            StartDateTime = GetTimeFlag(input.StartDate),
+            Parent = input.Parent
+        };
+
+        var request = new ClickUpRequest(endpoint, Method.Put, Creds)
+            .WithJsonBody(requestBody, JsonConfig.Settings);
+
+        return Client.ExecuteWithErrorHandling<TaskEntity>(request);
+    }
+
     [Action("Delete task", Description = "Delete specific task")]
     public Task DeleteTask([ActionParameter] TaskRequest task)
     {
@@ -145,6 +169,9 @@ public class TaskActions : ClickUpActions
 
         return Client.ExecuteWithErrorHandling<TaskCustomFieldsResponse>(request);
     }
+
+    private static bool? GetTimeFlag(DateTime? value)
+        => value.HasValue ? value.Value.TimeOfDay != TimeSpan.Zero : null;
 
     #endregion
 }
