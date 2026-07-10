@@ -2,6 +2,8 @@ using Apps.ClickUp.Api;
 using Apps.ClickUp.Constants;
 using Apps.ClickUp.Invocables;
 using Apps.ClickUp.Models.Entities.CustomFields.Dropdown;
+using Apps.ClickUp.Models.Request.CustomField;
+using Apps.ClickUp.Models.Request.Task;
 using Apps.ClickUp.Models.Response.Task;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
@@ -19,17 +21,17 @@ public class DropdownValueCustomFieldDataHandler : ClickUpInvocable, IAsyncDataS
     
     public DropdownValueCustomFieldDataHandler(
         InvocationContext invocationContext, 
-        [ActionParameter] string taskId,
-        [ActionParameter] string id) : base(invocationContext)
+        [ActionParameter] TaskRequest taskRequest,
+        [ActionParameter] CustomDropdownFieldRequest fieldRequest) : base(invocationContext)
     {
-        if (string.IsNullOrWhiteSpace(taskId))
+        if (string.IsNullOrWhiteSpace(taskRequest.TaskId))
             throw new PluginMisconfigurationException("Please specify a task ID first");
 
-        if (string.IsNullOrWhiteSpace(id))
+        if (string.IsNullOrWhiteSpace(fieldRequest.Id))
             throw new PluginMisconfigurationException("Please specify a dropdown ID first");
         
-        _taskId = taskId;
-        _dropdownId = id;
+        _taskId = taskRequest.TaskId;
+        _dropdownId = fieldRequest.Id;
     }
     
     public async Task<IEnumerable<DataSourceItem>> GetDataAsync(DataSourceContext context, CancellationToken cancellationToken)

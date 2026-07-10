@@ -2,6 +2,7 @@
 using Apps.ClickUp.DataSourceHandlers.List;
 using Apps.ClickUp.Models.Request.CustomField;
 using Apps.ClickUp.Models.Request.List;
+using Apps.ClickUp.Models.Request.Task;
 using Tests.ClickUp.Base;
 
 namespace Tests.ClickUp;
@@ -108,8 +109,8 @@ public class DataHandlerTests : TestBase
     public async Task DropdownCustomFieldDataHandler_IsSuccess()
     {
         // Arrange
-        string taskId = "86bavkjat";
-        var handler = new DropdownCustomFieldDataHandler(InvocationContext, taskId);
+        var taskRequest = new TaskRequest { TaskId = "86bavkjat" };
+        var handler = new DropdownCustomFieldDataHandler(InvocationContext, taskRequest);
 
         // Act
         var result = await handler.GetDataAsync(new() { SearchString = "status" }, CancellationToken.None);
@@ -125,9 +126,9 @@ public class DataHandlerTests : TestBase
     public async Task DropdownValueCustomFieldDataHandler_IsSuccess()
     {
         // Arrange
-        string taskId = "86bavkjat";
-        string dropdownId = "0d9f8507-742c-4274-aae3-68293809b2c0";
-        var handler = new DropdownValueCustomFieldDataHandler(InvocationContext, taskId, dropdownId);
+        var taskRequest = new TaskRequest { TaskId = "86bavkjat" };
+        var dropdownRequest = new CustomDropdownFieldRequest { Id = "0d9f8507-742c-4274-aae3-68293809b2c0" };
+        var handler = new DropdownValueCustomFieldDataHandler(InvocationContext, taskRequest, dropdownRequest);
 
         // Act
         var result = await handler.GetDataAsync(new() { SearchString = "" }, CancellationToken.None);

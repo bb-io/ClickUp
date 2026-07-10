@@ -71,12 +71,13 @@ public class CustomFieldActions(InvocationContext invocationContext) : ClickUpAc
 
     [Action("Set dropdown custom field value", Description = "Set dropdown value of a specific custom field")]
     public Task SetDropdownCustomFieldValue(
-        [ActionParameter] TaskRequest field,
+        [ActionParameter] TaskRequest taskInput,
         [ActionParameter] CreateRequestQuery query,
-        [ActionParameter] CustomDropdownFieldValue value)
+        [ActionParameter] CustomDropdownFieldRequest fieldInput,
+        [ActionParameter] CustomDropdownFieldValue fieldValueInput)
     {
-        var payload = new { value = value.DropdownValueId };
-        return SetCustomFieldValue(field.TaskId, value.Id, query, payload);
+        var payload = new { value = fieldValueInput.DropdownValueId };
+        return SetCustomFieldValue(taskInput.TaskId, fieldInput.Id, query, payload);
     }
     
     private Task SetCustomFieldValue(string taskId, string fieldId, CreateRequestQuery query, object value)
