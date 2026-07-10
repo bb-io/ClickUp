@@ -2,9 +2,10 @@ using Apps.ClickUp.Api;
 using Apps.ClickUp.Constants;
 using Apps.ClickUp.Invocables;
 using Apps.ClickUp.Models.Request.CustomField;
-using Apps.ClickUp.Models.Response.CusomField;
+using Apps.ClickUp.Models.Response.CustomField;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using RestSharp;
 
@@ -24,7 +25,7 @@ public class CustomFieldDataHandler : ClickUpInvocable, IAsyncDataSourceHandler
         CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(_request.ListId))
-            throw new("You should specify List ID first");
+            throw new PluginMisconfigurationException("You should specify List ID first");
 
         var request = new ClickUpRequest($"{ApiEndpoints.Lists}/{_request.ListId}/field", Method.Get, Creds);
         var teams = await Client.ExecuteWithErrorHandling<ListCustomFieldsResponse>(request);

@@ -4,7 +4,8 @@ using Apps.ClickUp.Constants;
 using Apps.ClickUp.Models.Request;
 using Apps.ClickUp.Models.Request.CustomField;
 using Apps.ClickUp.Models.Request.List;
-using Apps.ClickUp.Models.Response.CusomField;
+using Apps.ClickUp.Models.Request.Task;
+using Apps.ClickUp.Models.Response.CustomField;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -14,13 +15,9 @@ using RestSharp;
 
 namespace Apps.ClickUp.Actions;
 
-[ActionList("Custom field")]
-public class CustomFieldActions : ClickUpActions
+[ActionList("Custom fields")]
+public class CustomFieldActions(InvocationContext invocationContext) : ClickUpActions(invocationContext)
 {
-    public CustomFieldActions(InvocationContext invocationContext) : base(invocationContext)
-    {
-    }
-
     [Action("Search custom fields", Description = "List all accessible custom fields")]
     public Task<ListCustomFieldsResponse> ListCustomFields([ActionParameter] ListRequest list)
     {
@@ -49,35 +46,43 @@ public class CustomFieldActions : ClickUpActions
         [ActionParameter] CustomFieldRequest field,
         [ActionParameter] CreateRequestQuery query,
         [ActionParameter] CustomFieldStringValue value)
-        => SetCustomFieldValue(field, query, value);
+        => SetCustomFieldValue(field.TaskId, field.FieldId, query, value);
 
-    [Action("Set number custom field value",
-        Description = "Set number value of a specific custom field (Number, Money, Emoji)")]
+    [Action("Set number custom field value", Description = "Set number value of a specific custom field (Number, Money, Emoji)")]
     public Task SetNumberCustomFieldValue(
         [ActionParameter] CustomFieldRequest field,
         [ActionParameter] CreateRequestQuery query,
         [ActionParameter] CustomFieldNumberValue value)
-        => SetCustomFieldValue(field, query, value);
+        => SetCustomFieldValue(field.TaskId, field.FieldId, query, value);
 
-    [Action("Set date custom field value",
-        Description = "Set date value of a specific custom field")]
+    [Action("Set date custom field value", Description = "Set date value of a specific custom field")]
     public Task SetDateCustomFieldValue(
         [ActionParameter] CustomFieldRequest field,
         [ActionParameter] CreateRequestQuery query,
         [ActionParameter] CustomFieldDateValue value)
-        => SetCustomFieldValue(field, query, value);
+        => SetCustomFieldValue(field.TaskId, field.FieldId, query, value);
 
-    [Action("Set location custom field value",
-        Description = "Set location value of a specific custom field")]
+    [Action("Set location custom field value", Description = "Set location value of a specific custom field")]
     public Task SetLocationCustomFieldValue(
         [ActionParameter] CustomFieldRequest field,
         [ActionParameter] CreateRequestQuery query,
         [ActionParameter] CustomFieldLocationValue value)
-        => SetCustomFieldValue(field, query, new CustomFieldLocationRequest(value));
+        => SetCustomFieldValue(field.TaskId, field.FieldId, query, new CustomFieldLocationRequest(value));
 
-    private Task SetCustomFieldValue(CustomFieldRequest field, CreateRequestQuery query, object value)
+    [Action("Set dropdown custom field value", Description = "Set dropdown value of a specific custom field")]
+    public Task SetDropdownCustomFieldValue(
+        [ActionParameter] TaskRequest taskInput,
+        [ActionParameter] CreateRequestQuery query,
+        [ActionParameter] CustomDropdownFieldRequest fieldInput,
+        [ActionParameter] CustomDropdownFieldValue fieldValueInput)
     {
-        var endpoint = $"{ApiEndpoints.Tasks}/{field.TaskId}{ApiEndpoints.CustomFields}/{field.FieldId}";
+        var payload = new { value = fieldValueInput.DropdownValueId };
+        return SetCustomFieldValue(taskInput.TaskId, fieldInput.Id, query, payload);
+    }
+    
+    private Task SetCustomFieldValue(string taskId, string fieldId, CreateRequestQuery query, object value)
+    {
+        var endpoint = $"{ApiEndpoints.Tasks}/{taskId}{ApiEndpoints.CustomFields}/{fieldId}";
         var request = new ClickUpRequest(endpoint.WithQuery(query), Method.Post, Creds)
             .WithJsonBody(value, JsonConfig.Settings);
 

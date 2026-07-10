@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <Product>ClickUp</Product>
     <Description>Customizable workplace productivity platform</Description>
-    <Version>1.0.10</Version>
+    <Version>1.0.11</Version>
     <AssemblyName>Apps.ClickUp</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
