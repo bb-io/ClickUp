@@ -103,4 +103,39 @@ public class DataHandlerTests : TestBase
         
         Assert.IsNotNull(result);
     }
+
+    [TestMethod]
+    public async Task DropdownCustomFieldDataHandler_IsSuccess()
+    {
+        // Arrange
+        string taskId = "86bavkjat";
+        var handler = new DropdownCustomFieldDataHandler(InvocationContext, taskId);
+
+        // Act
+        var result = await handler.GetDataAsync(new() { SearchString = "status" }, CancellationToken.None);
+
+        // Assert
+        foreach (var field in result)
+            Console.WriteLine($"{field.Value} - {field.DisplayName}");
+        
+        Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    public async Task DropdownValueCustomFieldDataHandler_IsSuccess()
+    {
+        // Arrange
+        string taskId = "86bavkjat";
+        string dropdownId = "0d9f8507-742c-4274-aae3-68293809b2c0";
+        var handler = new DropdownValueCustomFieldDataHandler(InvocationContext, taskId, dropdownId);
+
+        // Act
+        var result = await handler.GetDataAsync(new() { SearchString = "" }, CancellationToken.None);
+
+        // Assert
+        foreach (var field in result)
+            Console.WriteLine($"{field.Value} - {field.DisplayName}");
+        
+        Assert.IsNotNull(result);
+    }
 }
