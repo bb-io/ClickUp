@@ -145,7 +145,7 @@ public class TaskActions(InvocationContext invocationContext) : ClickUpActions(i
         if (!expectedTypes.Contains(actualType))
         {
             throw new PluginMisconfigurationException(
-                $"Custom field '{field}' is type '{actualType}', but this action expects: {string.Join(", ", expectedTypes)}.");
+                $"Custom field '{field.FieldId}' is type '{actualType}', but this action expects: {string.Join(", ", expectedTypes)}.");
         }
 
         return match.ToObject<TEntity>(JsonSerializer.Create(JsonConfig.Settings))!;
