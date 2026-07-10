@@ -93,66 +93,59 @@ public class TaskActions(InvocationContext invocationContext) : ClickUpActions(i
 
     [Action("Get task string custom field", Description = "Get task custom field with a string value")]
     public async Task<StringCustomFieldEntity> GetTaskStringCustomField(
-        [ActionParameter] TaskRequest task,
-        [ActionParameter] CustomFieldNameRequest field)
+        [ActionParameter] CustomFieldRequest field)
     {
-        return await GetTaskCustomField<StringCustomFieldEntity>(task, field.Name, "text", "short_text");
+        return await GetTaskCustomField<StringCustomFieldEntity>(field, field.FieldId, "text", "short_text");
     }
 
     [Action("Get task number custom field", Description = "Get task custom field with a number value")]
     public async Task<NumberCustomFieldEntity> GetTaskNumberCustomField(
-        [ActionParameter] TaskRequest task,
-        [ActionParameter] CustomFieldNameRequest field)
+        [ActionParameter] CustomFieldRequest field)
     {
-        return await GetTaskCustomField<NumberCustomFieldEntity>(task, field.Name, "number");
+        return await GetTaskCustomField<NumberCustomFieldEntity>(field, field.FieldId, "number");
     }
 
     [Action("Get task date custom field", Description = "Get task custom field with a date value")]
     public async Task<DateCustomFieldEntity> GetTaskDateCustomField(
-        [ActionParameter] TaskRequest task,
-        [ActionParameter] CustomFieldNameRequest field)
+        [ActionParameter] CustomFieldRequest field)
     {
-        return await GetTaskCustomField<DateCustomFieldEntity>(task, field.Name, "date");
+        return await GetTaskCustomField<DateCustomFieldEntity>(field, field.FieldId, "date");
     }
 
     [Action("Get task location custom field", Description = "Get task custom field with a location value")]
     public async Task<GetTaskLocationCustomFieldResponse> GetTaskLocationCustomField(
-        [ActionParameter] TaskRequest task,
-        [ActionParameter] CustomFieldNameRequest field)
+        [ActionParameter] CustomFieldRequest field)
     {
-        var locationField = await GetTaskCustomField<LocationCustomFieldEntity>(task, field.Name, "location");
+        var locationField = await GetTaskCustomField<LocationCustomFieldEntity>(field, field.FieldId, "location");
         return new(locationField);
     }
 
     [Action("Get task dropdown custom field", Description = "Get task custom field with a dropdown value")]
     public async Task<GetTaskDropdownCustomFieldResponse> GetTaskDropdownCustomField(
-        [ActionParameter] TaskRequest task,
-        [ActionParameter] CustomFieldNameRequest field)
+        [ActionParameter] CustomFieldRequest field)
     {
-        var locationField = await GetTaskCustomField<DropdownCustomFieldEntity>(task, field.Name, "drop_down");
+        var locationField = await GetTaskCustomField<DropdownCustomFieldEntity>(field, field.FieldId, "drop_down");
         return new(locationField);
     }
     
     private async Task<TEntity> GetTaskCustomField<TEntity>(
-        TaskRequest task, 
-        string fieldName, 
+        CustomFieldRequest field, 
         params string[] expectedTypes)
         where TEntity : CustomFieldEntity
     {
-        var endpoint = $"{ApiEndpoints.Tasks}/{task.TaskId}";
+        var endpoint = $"{ApiEndpoints.Tasks}/{field.TaskId}";
         var request = new ClickUpRequest(endpoint, Method.Get, Creds);
         var response = await Client.ExecuteWithErrorHandling<TaskCustomFieldsResponse>(request);
 
-        var match = response.CustomFields.FirstOrDefault(f => string.Equals(f["name"]?.ToString(), fieldName, StringComparison.OrdinalIgnoreCase));
+        var match = response.CustomFields.FirstOrDefault(f => string.Equals(f["id"]?.ToString(), field.FieldId, StringComparison.OrdinalIgnoreCase));
         if (match is null)
-            throw new PluginMisconfigurationException($"No custom field named '{fieldName}' was found on this task.");
+            throw new PluginMisconfigurationException($"No custom field with ID '{field}' was found on this task.");
 
         var actualType = match["type"]?.ToString();
         if (!expectedTypes.Contains(actualType))
         {
             throw new PluginMisconfigurationException(
-                $"Custom field '{fieldName}' is type '{actualType}', " +
-                $"but this action expects: {string.Join(", ", expectedTypes)}.");
+                $"Custom field '{field}' is type '{actualType}', but this action expects: {string.Join(", ", expectedTypes)}.");
         }
 
         return match.ToObject<TEntity>(JsonSerializer.Create(JsonConfig.Settings))!;

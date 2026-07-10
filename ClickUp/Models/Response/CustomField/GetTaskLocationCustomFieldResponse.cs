@@ -11,21 +11,21 @@ public class GetTaskLocationCustomFieldResponse : CustomFieldEntity
         Id = entity.Id;
         Name = entity.Name;
         Type = entity.Type;
-        Latitude = entity.Value.Location.Lat;
-        Longitude = entity.Value.Location.Lng;
-        PlaceId = entity.Value.PlaceId;
-        FormattedAddress = entity.Value.FormattedAddress;
+        Latitude = entity.Value?.Location.Lat;
+        Longitude = entity.Value?.Location.Lng;
+        PlaceId = entity.Value?.PlaceId;
+        FormattedAddress = entity.Value?.FormattedAddress;
     }
     
     [Display("Latitude")] 
-    public double Latitude { get; set; }
+    public double? Latitude { get; set; }
 
     [Display("Longitude")] 
-    public double Longitude { get; set; }
+    public double? Longitude { get; set; }
 
     [Display("Place ID")] 
-    public string PlaceId { get; set; }
+    public string? PlaceId { get; set; }
 
     [Display("Formatted address")] 
-    public string FormattedAddress { get; set; }
+    public string? FormattedAddress { get; set; }
 }
