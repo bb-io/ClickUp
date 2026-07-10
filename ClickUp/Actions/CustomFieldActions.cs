@@ -14,13 +14,9 @@ using RestSharp;
 
 namespace Apps.ClickUp.Actions;
 
-[ActionList("Custom field")]
-public class CustomFieldActions : ClickUpActions
+[ActionList("Custom fields")]
+public class CustomFieldActions(InvocationContext invocationContext) : ClickUpActions(invocationContext)
 {
-    public CustomFieldActions(InvocationContext invocationContext) : base(invocationContext)
-    {
-    }
-
     [Action("Search custom fields", Description = "List all accessible custom fields")]
     public Task<ListCustomFieldsResponse> ListCustomFields([ActionParameter] ListRequest list)
     {

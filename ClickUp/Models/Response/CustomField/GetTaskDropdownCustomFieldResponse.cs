@@ -12,11 +12,17 @@ public class GetTaskDropdownCustomFieldResponse : CustomFieldEntity
         Name = entity.Name;
         Type = entity.Type;
         Index = entity.Value;
-        Value = entity.TypeConfig.Options.FirstOrDefault(x => x.OrderIndex == Index)?.Name ?? string.Empty;
+
+        var option = entity.TypeConfig.Options.FirstOrDefault(x => x.OrderIndex == Index);
+        DropdownValueId = option?.Id ?? string.Empty;
+        Value = option?.Name ?? string.Empty;
     }
     
     [Display("Dropdown value")]
     public string Value { get; set; }
+
+    [Display("Dropdown value ID")]
+    public string DropdownValueId { get; set; }
 
     [Display("Dropdown order index")]
     public int Index { get; set; }
