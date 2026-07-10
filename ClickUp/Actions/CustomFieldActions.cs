@@ -4,7 +4,7 @@ using Apps.ClickUp.Constants;
 using Apps.ClickUp.Models.Request;
 using Apps.ClickUp.Models.Request.CustomField;
 using Apps.ClickUp.Models.Request.List;
-using Apps.ClickUp.Models.Response.CusomField;
+using Apps.ClickUp.Models.Response.CustomField;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
