@@ -1,5 +1,6 @@
 using Apps.ClickUp.Actions;
 using Apps.ClickUp.Models.Request.CustomField;
+using Apps.ClickUp.Models.Request.Task;
 using Tests.ClickUp.Base;
 
 namespace Tests.ClickUp;
@@ -96,16 +97,16 @@ public class TaskActionTests : TestBase
     {
         // Arrange
         var actions = new TaskActions(InvocationContext);
-        var customFieldRequest = new CustomFieldRequest
+        var taskRequest = new TaskRequest
         {
             TaskId = "86bavkjat",
             ListId = "901417947717",
-            FolderId = "901410616216",
-            FieldId = "0d9f8507-742c-4274-aae3-68293809b2c0"
+            FolderId = "901410616216"
         };
+        var fieldRequest = new CustomDropdownFieldRequest { Id = "0d9f8507-742c-4274-aae3-68293809b2c0" };
 
         // Act
-        var result = await actions.GetTaskDropdownCustomField(customFieldRequest);
+        var result = await actions.GetTaskDropdownCustomField(taskRequest, fieldRequest);
 
         // Assert
         PrintResult(result);
