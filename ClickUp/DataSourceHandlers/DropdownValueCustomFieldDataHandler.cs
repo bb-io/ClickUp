@@ -27,11 +27,11 @@ public class DropdownValueCustomFieldDataHandler : ClickUpInvocable, IAsyncDataS
         if (string.IsNullOrWhiteSpace(taskRequest.TaskId))
             throw new PluginMisconfigurationException("Please specify a task ID first");
 
-        if (string.IsNullOrWhiteSpace(fieldRequest.Id))
+        if (string.IsNullOrWhiteSpace(fieldRequest.FieldId))
             throw new PluginMisconfigurationException("Please specify a dropdown ID first");
         
         _taskId = taskRequest.TaskId;
-        _dropdownId = fieldRequest.Id;
+        _dropdownId = fieldRequest.FieldId;
     }
     
     public async Task<IEnumerable<DataSourceItem>> GetDataAsync(DataSourceContext context, CancellationToken cancellationToken)
