@@ -93,30 +93,34 @@ public class TaskActions(InvocationContext invocationContext) : ClickUpActions(i
 
     [Action("Get task string custom field", Description = "Get task custom field with a string value")]
     public async Task<StringCustomFieldEntity> GetTaskStringCustomField(
-        [ActionParameter] CustomFieldRequest field)
+        [ActionParameter] TaskRequest taskInput,
+        [ActionParameter] CustomStringFieldRequest fieldInput)
     {
-        return await GetTaskCustomField<StringCustomFieldEntity>(field.TaskId, field.FieldId, "text", "short_text");
+        return await GetTaskCustomField<StringCustomFieldEntity>(taskInput.TaskId, fieldInput.FieldId, "text", "short_text");
     }
 
     [Action("Get task number custom field", Description = "Get task custom field with a number value")]
     public async Task<NumberCustomFieldEntity> GetTaskNumberCustomField(
-        [ActionParameter] CustomFieldRequest field)
+        [ActionParameter] TaskRequest taskInput,
+        [ActionParameter] CustomNumberFieldRequest fieldInput)
     {
-        return await GetTaskCustomField<NumberCustomFieldEntity>(field.TaskId, field.FieldId, "number");
+        return await GetTaskCustomField<NumberCustomFieldEntity>(taskInput.TaskId, fieldInput.FieldId, "number");
     }
 
     [Action("Get task date custom field", Description = "Get task custom field with a date value")]
     public async Task<DateCustomFieldEntity> GetTaskDateCustomField(
-        [ActionParameter] CustomFieldRequest field)
+        [ActionParameter] TaskRequest taskInput,
+        [ActionParameter] CustomDateFieldRequest fieldInput)
     {
-        return await GetTaskCustomField<DateCustomFieldEntity>(field.TaskId, field.FieldId, "date");
+        return await GetTaskCustomField<DateCustomFieldEntity>(taskInput.TaskId, fieldInput.FieldId, "date");
     }
 
     [Action("Get task location custom field", Description = "Get task custom field with a location value")]
     public async Task<GetTaskLocationCustomFieldResponse> GetTaskLocationCustomField(
-        [ActionParameter] CustomFieldRequest field)
+        [ActionParameter] TaskRequest taskInput,
+        [ActionParameter] CustomLocationFieldRequest fieldInput)
     {
-        var locationField = await GetTaskCustomField<LocationCustomFieldEntity>(field.TaskId, field.FieldId, "location");
+        var locationField = await GetTaskCustomField<LocationCustomFieldEntity>(taskInput.TaskId, fieldInput.FieldId, "location");
         return new(locationField);
     }
 
@@ -125,9 +129,11 @@ public class TaskActions(InvocationContext invocationContext) : ClickUpActions(i
         [ActionParameter] TaskRequest taskInput,
         [ActionParameter] CustomDropdownFieldRequest fieldInput)
     {
-        var locationField = await GetTaskCustomField<DropdownCustomFieldEntity>(taskInput.TaskId, fieldInput.Id, "drop_down");
+        var locationField = await GetTaskCustomField<DropdownCustomFieldEntity>(taskInput.TaskId, fieldInput.FieldId, "drop_down");
         return new(locationField);
     }
+    
+    #endregion
     
     private async Task<TEntity> GetTaskCustomField<TEntity>(
         string taskId,
@@ -158,6 +164,4 @@ public class TaskActions(InvocationContext invocationContext) : ClickUpActions(i
 
     private static int? GetTimeEstimate(int? value)
         => value.HasValue ? checked(value.Value * 60 * 60 * 1000) : null;
-
-    #endregion
 }

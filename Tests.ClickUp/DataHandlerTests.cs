@@ -1,4 +1,5 @@
 ﻿using Apps.ClickUp.DataSourceHandlers;
+using Apps.ClickUp.DataSourceHandlers.CustomField;
 using Apps.ClickUp.DataSourceHandlers.List;
 using Apps.ClickUp.Models.Request.CustomField;
 using Apps.ClickUp.Models.Request.List;
@@ -109,7 +110,7 @@ public class DataHandlerTests : TestBase
     public async Task DropdownCustomFieldDataHandler_IsSuccess()
     {
         // Arrange
-        var taskRequest = new TaskRequest { TaskId = "86bavkjat" };
+        var taskRequest = new TaskRequest { TaskId = "86baxgdyr" };
         var handler = new DropdownCustomFieldDataHandler(InvocationContext, taskRequest);
 
         // Act
@@ -123,11 +124,79 @@ public class DataHandlerTests : TestBase
     }
 
     [TestMethod]
+    public async Task StringCustomFieldDataHandler_IsSuccess()
+    {
+        // Arrange
+        var taskRequest = new TaskRequest { TaskId = "86baxgdyr" };
+        var handler = new StringCustomFieldDataHandler(InvocationContext, taskRequest);
+
+        // Act
+        var result = await handler.GetDataAsync(new() { SearchString = "" }, CancellationToken.None);
+
+        // Assert
+        foreach (var field in result)
+            Console.WriteLine($"{field.Value} - {field.DisplayName}");
+        
+        Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    public async Task NumberCustomFieldDataHandler_IsSuccess()
+    {
+        // Arrange
+        var taskRequest = new TaskRequest { TaskId = "86baxgdyr" };
+        var handler = new NumberCustomFieldDataHandler(InvocationContext, taskRequest);
+
+        // Act
+        var result = await handler.GetDataAsync(new() { SearchString = "" }, CancellationToken.None);
+
+        // Assert
+        foreach (var field in result)
+            Console.WriteLine($"{field.Value} - {field.DisplayName}");
+        
+        Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    public async Task LocationCustomFieldDataHandler_IsSuccess()
+    {
+        // Arrange
+        var taskRequest = new TaskRequest { TaskId = "86baxgdyr" };
+        var handler = new LocationCustomFieldDataHandler(InvocationContext, taskRequest);
+
+        // Act
+        var result = await handler.GetDataAsync(new() { SearchString = "" }, CancellationToken.None);
+
+        // Assert
+        foreach (var field in result)
+            Console.WriteLine($"{field.Value} - {field.DisplayName}");
+        
+        Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    public async Task DateCustomFieldDataHandler_IsSuccess()
+    {
+        // Arrange
+        var taskRequest = new TaskRequest { TaskId = "86baxgdyr" };
+        var handler = new DateCustomFieldDataHandler(InvocationContext, taskRequest);
+
+        // Act
+        var result = await handler.GetDataAsync(new() { SearchString = "" }, CancellationToken.None);
+
+        // Assert
+        foreach (var field in result)
+            Console.WriteLine($"{field.Value} - {field.DisplayName}");
+        
+        Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
     public async Task DropdownValueCustomFieldDataHandler_IsSuccess()
     {
         // Arrange
         var taskRequest = new TaskRequest { TaskId = "86bavkjat" };
-        var dropdownRequest = new CustomDropdownFieldRequest { Id = "0d9f8507-742c-4274-aae3-68293809b2c0" };
+        var dropdownRequest = new CustomDropdownFieldRequest { FieldId = "0d9f8507-742c-4274-aae3-68293809b2c0" };
         var handler = new DropdownValueCustomFieldDataHandler(InvocationContext, taskRequest, dropdownRequest);
 
         // Act

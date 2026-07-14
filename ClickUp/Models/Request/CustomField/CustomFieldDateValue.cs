@@ -1,10 +1,9 @@
-using Apps.ClickUp.Utils.Converters;
-using Newtonsoft.Json;
+using Blackbird.Applications.Sdk.Common;
 
 namespace Apps.ClickUp.Models.Request.CustomField;
 
 public class CustomFieldDateValue
 {
-    [JsonConverter(typeof(UnixTimestampConverter))] 
+    [Display("Value")]
     public DateTime Value { get; set; }
 }
