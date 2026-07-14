@@ -73,7 +73,7 @@ public class DataHandlerTests : TestBase
     [TestMethod]
     public async Task PrimaryListDataHandler_works()
     {
-        var handler = new PrimaryListDataHandler(InvocationContext, new ListRequest { FolderId = "901513903877" });
+        var handler = new PrimaryListDataHandler(InvocationContext, new ListRequest { FolderId = "901410616216" });
 
         var result = await handler.GetDataAsync(new() { }, CancellationToken.None);
 

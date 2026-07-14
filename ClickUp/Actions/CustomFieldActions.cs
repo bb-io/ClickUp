@@ -1,6 +1,7 @@
 using Apps.ClickUp.Actions.Base;
 using Apps.ClickUp.Api;
 using Apps.ClickUp.Constants;
+using Apps.ClickUp.Extensions;
 using Apps.ClickUp.Models.Request;
 using Apps.ClickUp.Models.Request.CustomField;
 using Apps.ClickUp.Models.Request.List;
@@ -18,13 +19,21 @@ namespace Apps.ClickUp.Actions;
 [ActionList("Custom fields")]
 public class CustomFieldActions(InvocationContext invocationContext) : ClickUpActions(invocationContext)
 {
-    [Action("Search custom fields", Description = "List all accessible custom fields")]
-    public Task<ListCustomFieldsResponse> ListCustomFields([ActionParameter] ListRequest list)
+    [Action("Search custom fields", Description = "Search all accessible custom fields")]
+    public async Task<ListCustomFieldsResponse> ListCustomFields(
+        [ActionParameter] ListRequest list,
+        [ActionParameter] SearchCustomFieldsRequest searchInput)
     {
-        var endpoint = $"{ApiEndpoints.Lists}/{list.ListId}{ApiEndpoints.CustomFields}";
+        string endpoint = $"{ApiEndpoints.Lists}/{list.ListId}{ApiEndpoints.CustomFields}";
         var request = new ClickUpRequest(endpoint, Method.Get, Creds);
+        
+        var response = await Client.ExecuteWithErrorHandling<ListCustomFieldsResponse>(request);
+        var customFields = response.Fields
+            .Where(x => x.Type.EqualsIgnoreCase(searchInput.FieldType))
+            .Where(x => x.Name.ContainsIgnoreCase(searchInput.FieldNameContains))
+            .ToList();
 
-        return Client.ExecuteWithErrorHandling<ListCustomFieldsResponse>(request);
+        return new(customFields);
     }
 
     [Action("Remove custom field value", Description = "Remove value of a specific custom field for the task")]
