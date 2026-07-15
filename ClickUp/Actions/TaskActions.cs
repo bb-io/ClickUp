@@ -5,6 +5,7 @@ using Apps.ClickUp.Models.Entities;
 using Apps.ClickUp.Models.Entities.CustomFields;
 using Apps.ClickUp.Models.Entities.CustomFields.Base;
 using Apps.ClickUp.Models.Entities.CustomFields.Dropdown;
+using Apps.ClickUp.Models.Entities.CustomFields.Label;
 using Apps.ClickUp.Models.Request;
 using Apps.ClickUp.Models.Request.CustomField;
 using Apps.ClickUp.Models.Request.List;
@@ -130,6 +131,15 @@ public class TaskActions(InvocationContext invocationContext) : ClickUpActions(i
         [ActionParameter] CustomDropdownFieldRequest fieldInput)
     {
         var locationField = await GetTaskCustomField<DropdownCustomFieldEntity>(taskInput.TaskId, fieldInput.FieldId, "drop_down");
+        return new(locationField);
+    }
+
+    [Action("Get task label custom field", Description = "Get task custom field with label values")]
+    public async Task<GetTaskLabelCustomFieldResponse> GetTaskLabelCustomField(
+        [ActionParameter] TaskRequest taskInput,
+        [ActionParameter] CustomLabelFieldRequest labelFieldInput)
+    {
+        var locationField = await GetTaskCustomField<LabelCustomFieldEntity>(taskInput.TaskId, labelFieldInput.FieldId, "labels");
         return new(locationField);
     }
     

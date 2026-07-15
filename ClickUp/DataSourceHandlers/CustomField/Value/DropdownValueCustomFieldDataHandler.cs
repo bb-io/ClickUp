@@ -1,5 +1,6 @@
 using Apps.ClickUp.Api;
 using Apps.ClickUp.Constants;
+using Apps.ClickUp.Extensions;
 using Apps.ClickUp.Invocables;
 using Apps.ClickUp.Models.Entities.CustomFields.Dropdown;
 using Apps.ClickUp.Models.Request.CustomField;
@@ -12,7 +13,7 @@ using Blackbird.Applications.Sdk.Common.Invocation;
 using Newtonsoft.Json;
 using RestSharp;
 
-namespace Apps.ClickUp.DataSourceHandlers;
+namespace Apps.ClickUp.DataSourceHandlers.CustomField.Value;
 
 public class DropdownValueCustomFieldDataHandler : ClickUpInvocable, IAsyncDataSourceItemHandler
 {
@@ -49,8 +50,7 @@ public class DropdownValueCustomFieldDataHandler : ClickUpInvocable, IAsyncDataS
             .SelectMany(f => f.TypeConfig.Options);
 
         return options
-            .Where(x => string.IsNullOrEmpty(context.SearchString) 
-                        || x.Name.Contains(context.SearchString, StringComparison.OrdinalIgnoreCase))
+            .Where(x => x.Name.ContainsIgnoreCase(context.SearchString))
             .Select(x => new DataSourceItem(x.Id, $"{x.OrderIndex}. {x.Name}"))
             .ToList();
     }

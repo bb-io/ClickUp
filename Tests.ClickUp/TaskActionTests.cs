@@ -9,6 +9,26 @@ namespace Tests.ClickUp;
 public class TaskActionTests : TestBase
 {
     [TestMethod]
+    public async Task GetTask_ReturnsTask()
+    {
+        // Arrange
+        var actions = new TaskActions(InvocationContext);
+        var taskRequest = new TaskRequest
+        {
+            TaskId = "86baxgdyr",
+            ListId = "901417947717",
+            FolderId = "901410616216",
+        };
+
+        // Act
+        var result = await actions.GetTask(taskRequest);
+
+        // Assert
+        PrintResult(result);
+        Assert.IsNotNull(result);
+    }
+    
+    [TestMethod]
     public async Task GetTaskStringCustomField_ReturnsCustomField()
     {
         // Arrange
@@ -107,6 +127,27 @@ public class TaskActionTests : TestBase
 
         // Act
         var result = await actions.GetTaskDropdownCustomField(taskRequest, fieldRequest);
+
+        // Assert
+        PrintResult(result);
+        Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    public async Task GetTaskLabelCustomField_ReturnsCustomField()
+    {
+        // Arrange
+        var actions = new TaskActions(InvocationContext);
+        var taskRequest = new TaskRequest
+        {
+            TaskId = "86baxgdyr",
+            ListId = "901417947717",
+            FolderId = "901410616216"
+        };
+        var fieldRequest = new CustomLabelFieldRequest { FieldId = "5f958ca8-3d31-43ec-a617-aa8ea3cc3d77" };
+
+        // Act
+        var result = await actions.GetTaskLabelCustomField(taskRequest, fieldRequest);
 
         // Assert
         PrintResult(result);

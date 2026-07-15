@@ -114,6 +114,17 @@ public class CustomFieldActions(InvocationContext invocationContext) : ClickUpAc
         var payload = new { value = fieldValueInput.DropdownValueId };
         return SetCustomFieldValue(taskInput.TaskId, fieldInput.FieldId, query, payload);
     }
+
+    [Action("Set label custom field value", Description = "Set label values of a specific custom field")]
+    public Task SetLabelCustomFieldValue(
+        [ActionParameter] TaskRequest taskInput,
+        [ActionParameter] CreateRequestQuery query,
+        [ActionParameter] CustomLabelFieldRequest fieldInput,
+        [ActionParameter] CustomLabelFieldValue fieldValueInput)
+    {
+        var payload = new { values = fieldValueInput.LabelValueIds.ToHashSet() };
+        return SetCustomFieldValue(taskInput.TaskId, fieldInput.FieldId, query, payload);
+    }
     
     private Task<RestResponse> SetCustomFieldValue(string taskId, string fieldId, CreateRequestQuery query, object value)
     {
