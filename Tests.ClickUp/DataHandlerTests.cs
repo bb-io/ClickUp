@@ -208,6 +208,23 @@ public class DataHandlerTests : TestBase
         
         Assert.IsNotNull(result);
     }
+
+    [TestMethod]
+    public async Task CheckboxCustomFieldDataHandler_IsSuccess()
+    {
+        // Arrange
+        var taskRequest = new TaskRequest { TaskId = "86baxgdyr" };
+        var handler = new CheckboxCustomFieldDataHandler(InvocationContext, taskRequest);
+
+        // Act
+        var result = await handler.GetDataAsync(new() { SearchString = "" }, CancellationToken.None);
+
+        // Assert
+        foreach (var field in result)
+            Console.WriteLine($"{field.Value} - {field.DisplayName}");
+        
+        Assert.IsNotNull(result);
+    }
     
     [TestMethod]
     public async Task DropdownValueCustomFieldDataHandler_IsSuccess()

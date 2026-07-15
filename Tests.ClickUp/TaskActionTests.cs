@@ -153,4 +153,25 @@ public class TaskActionTests : TestBase
         PrintResult(result);
         Assert.IsNotNull(result);
     }
+    
+    [TestMethod]
+    public async Task GetTaskCheckboxCustomField_ReturnsCustomField()
+    {
+        // Arrange
+        var actions = new TaskActions(InvocationContext);
+        var taskRequest = new TaskRequest
+        {
+            TaskId = "86baxgdyr",
+            ListId = "901417947717",
+            FolderId = "901410616216"
+        };
+        var fieldRequest = new CustomCheckboxFieldRequest { FieldId = "e5d66086-e926-4b6b-a825-3eea03673a4e" };
+
+        // Act
+        var result = await actions.GetTaskCheckboxCustomField(taskRequest, fieldRequest);
+
+        // Assert
+        PrintResult(result);
+        Assert.IsNotNull(result);
+    }
 }

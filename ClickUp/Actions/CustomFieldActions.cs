@@ -125,6 +125,17 @@ public class CustomFieldActions(InvocationContext invocationContext) : ClickUpAc
         var payload = new { value = fieldValueInput.LabelValueIds.ToHashSet() };
         return SetCustomFieldValue(taskInput.TaskId, fieldInput.FieldId, query, payload);
     }
+
+    [Action("Set checkbox custom field value", Description = "Set checkbox value of a specific custom field")]
+    public Task SetCheckboxCustomFieldValue(
+        [ActionParameter] TaskRequest taskInput,
+        [ActionParameter] CreateRequestQuery query,
+        [ActionParameter] CustomCheckboxFieldRequest fieldInput,
+        [ActionParameter] CustomCheckboxFieldValue fieldValueInput)
+    {
+        var payload = new { value = fieldValueInput.Value };
+        return SetCustomFieldValue(taskInput.TaskId, fieldInput.FieldId, query, payload);
+    }
     
     private Task<RestResponse> SetCustomFieldValue(string taskId, string fieldId, CreateRequestQuery query, object value)
     {

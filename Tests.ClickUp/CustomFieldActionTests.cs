@@ -141,4 +141,23 @@ public class CustomFieldActionTests : TestBase
         // Act
         await actions.SetLabelCustomFieldValue(taskRequest, query, fieldRequest, fieldValue);
     }
+    
+    [TestMethod]
+    public async Task SetCheckboxCustomFieldValue_IsSuccess()
+    {
+        // Arrange
+        var actions = new CustomFieldActions(InvocationContext);
+        var taskRequest = new TaskRequest
+        {
+            TaskId = "86baxgdyr",
+            ListId = "901417947717",
+            FolderId = "901410616216",
+        };
+        var query = new CreateRequestQuery { };
+        var fieldRequest = new CustomCheckboxFieldRequest { FieldId = "e5d66086-e926-4b6b-a825-3eea03673a4e" };
+        var fieldValue = new CustomCheckboxFieldValue { Value = true };
+
+        // Act
+        await actions.SetCheckboxCustomFieldValue(taskRequest, query, fieldRequest, fieldValue);
+    }
 }

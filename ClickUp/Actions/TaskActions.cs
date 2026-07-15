@@ -142,6 +142,15 @@ public class TaskActions(InvocationContext invocationContext) : ClickUpActions(i
         var locationField = await GetTaskCustomField<LabelCustomFieldEntity>(taskInput.TaskId, labelFieldInput.FieldId, "labels");
         return new(locationField);
     }
+
+    [Action("Get task checkbox custom field", Description = "Get task custom field with checkbox value")]
+    public async Task<GetTaskCheckboxCustomFieldResponse> GetTaskCheckboxCustomField(
+        [ActionParameter] TaskRequest taskInput,
+        [ActionParameter] CustomCheckboxFieldRequest labelFieldInput)
+    {
+        var locationField = await GetTaskCustomField<CheckboxCustomFieldEntity>(taskInput.TaskId, labelFieldInput.FieldId, "checkbox");
+        return new(locationField);
+    }
     
     #endregion
     
