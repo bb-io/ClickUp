@@ -4,10 +4,22 @@ namespace Apps.ClickUp.Utils.Converters;
 
 public class UnixTimestampConverter : JsonConverter
 {
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
+        if (value is null)
+        {
+            writer.WriteNull();
+            return;
+        }
+        
         if (value is not DateTime dateTime)
             throw new ArgumentException("You can only serialize DateTime type to a timestamp");
+        
+        if (dateTime == default)
+        {
+            writer.WriteNull();
+            return;
+        }
 
         var offset = new DateTimeOffset(dateTime);
         var timestamp = offset.ToUnixTimeMilliseconds();

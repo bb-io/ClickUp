@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <Product>ClickUp</Product>
     <Description>Customizable workplace productivity platform</Description>
-    <Version>1.0.11</Version>
+    <Version>1.0.12</Version>
     <AssemblyName>Apps.ClickUp</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
@@ -13,7 +13,14 @@
     <PackageReference Include="Blackbird.Applications.SDK.Extensions.FileManagement" Version="1.0.1" />
     <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.3" />
   </ItemGroup>
+  
   <ItemGroup>
     <EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

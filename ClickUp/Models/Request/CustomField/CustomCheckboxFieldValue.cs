@@ -2,8 +2,8 @@ using Blackbird.Applications.Sdk.Common;
 
 namespace Apps.ClickUp.Models.Request.CustomField;
 
-public class CustomFieldNumberValue
+public class CustomCheckboxFieldValue
 {
     [Display("Value")]
-    public long Value { get; set; }
+    public bool Value { get; set; }
 }

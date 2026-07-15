@@ -5,7 +5,7 @@ using Blackbird.Applications.Sdk.Common.Webhooks;
 
 namespace Apps.ClickUp.Webhooks.Lists;
 
-[WebhookList]
+[WebhookList("Tasks")]
 public class TaskWebhooks : ClickUpWebhookList
 {
     [Webhook("On task created", typeof(TaskCreatedHandler),

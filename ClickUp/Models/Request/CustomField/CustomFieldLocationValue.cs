@@ -7,7 +7,7 @@ public class CustomFieldLocationValue
     public double Latitude { get; set; }
     
     public double Longitude { get; set; }
-    
-    [Display("Formatted address")]
-    public string FormattedAddress { get; set; }
+
+    [Display("Formatted address")] 
+    public string FormattedAddress { get; set; } = string.Empty;
 }

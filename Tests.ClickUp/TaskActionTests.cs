@@ -9,20 +9,40 @@ namespace Tests.ClickUp;
 public class TaskActionTests : TestBase
 {
     [TestMethod]
+    public async Task GetTask_ReturnsTask()
+    {
+        // Arrange
+        var actions = new TaskActions(InvocationContext);
+        var taskRequest = new TaskRequest
+        {
+            TaskId = "86baxgdyr",
+            ListId = "901417947717",
+            FolderId = "901410616216",
+        };
+
+        // Act
+        var result = await actions.GetTask(taskRequest);
+
+        // Assert
+        PrintResult(result);
+        Assert.IsNotNull(result);
+    }
+    
+    [TestMethod]
     public async Task GetTaskStringCustomField_ReturnsCustomField()
     {
         // Arrange
         var actions = new TaskActions(InvocationContext);
-        var customFieldRequest = new CustomFieldRequest
+        var taskRequest = new TaskRequest()
         {
             TaskId = "86bavd71m",
             ListId = "901417947717",
             FolderId = "901410616216",
-            FieldId = "54ea8863-c02b-49e7-a4a5-81b5764ffdc2"
         };
+        var fieldRequest = new CustomStringFieldRequest { FieldId = "54ea8863-c02b-49e7-a4a5-81b5764ffdc2" };
 
         // Act
-        var result = await actions.GetTaskStringCustomField(customFieldRequest);
+        var result = await actions.GetTaskStringCustomField(taskRequest, fieldRequest);
 
         // Assert
         PrintResult(result);
@@ -34,16 +54,16 @@ public class TaskActionTests : TestBase
     {
         // Arrange
         var actions = new TaskActions(InvocationContext);
-        var customFieldRequest = new CustomFieldRequest
+        var taskRequest = new TaskRequest
         {
             TaskId = "86bavd71m",
             ListId = "901417947717",
             FolderId = "901410616216",
-            FieldId = "0f74d9b4-1d61-4a71-8ec2-55d7ffa95403"
         };
+        var fieldRequest = new CustomNumberFieldRequest { FieldId = "0f74d9b4-1d61-4a71-8ec2-55d7ffa95403" };
 
         // Act
-        var result = await actions.GetTaskNumberCustomField(customFieldRequest);
+        var result = await actions.GetTaskNumberCustomField(taskRequest, fieldRequest);
 
         // Assert
         PrintResult(result);
@@ -55,16 +75,16 @@ public class TaskActionTests : TestBase
     {
         // Arrange
         var actions = new TaskActions(InvocationContext);
-        var customFieldRequest = new CustomFieldRequest
+        var taskRequest = new TaskRequest
         {
             TaskId = "86bavd71m",
             ListId = "901417947717",
-            FolderId = "901410616216",
-            FieldId = "3a3cf71b-ea45-40a5-a0db-5353f03aa1d8"
+            FolderId = "901410616216"
         };
+        var fieldRequest = new CustomDateFieldRequest { FieldId = "3a3cf71b-ea45-40a5-a0db-5353f03aa1d8" };
         
         // Act
-        var result = await actions.GetTaskDateCustomField(customFieldRequest);
+        var result = await actions.GetTaskDateCustomField(taskRequest, fieldRequest);
 
         // Assert
         PrintResult(result);
@@ -76,16 +96,16 @@ public class TaskActionTests : TestBase
     {
         // Arrange
         var actions = new TaskActions(InvocationContext);
-        var customFieldRequest = new CustomFieldRequest
+        var taskRequest = new TaskRequest
         {
-            TaskId = "86bavkjat",
+            TaskId = "86bavd71m",
             ListId = "901417947717",
             FolderId = "901410616216",
-            FieldId = "20b79f58-b337-43f3-991c-08a64fcea2d3"
         };
+        var fieldRequest = new CustomLocationFieldRequest { FieldId = "20b79f58-b337-43f3-991c-08a64fcea2d3" };
 
         // Act
-        var result = await actions.GetTaskLocationCustomField(customFieldRequest);
+        var result = await actions.GetTaskLocationCustomField(taskRequest, fieldRequest);
 
         // Assert
         PrintResult(result);
@@ -103,10 +123,52 @@ public class TaskActionTests : TestBase
             ListId = "901417947717",
             FolderId = "901410616216"
         };
-        var fieldRequest = new CustomDropdownFieldRequest { Id = "0d9f8507-742c-4274-aae3-68293809b2c0" };
+        var fieldRequest = new CustomDropdownFieldRequest { FieldId = "0d9f8507-742c-4274-aae3-68293809b2c0" };
 
         // Act
         var result = await actions.GetTaskDropdownCustomField(taskRequest, fieldRequest);
+
+        // Assert
+        PrintResult(result);
+        Assert.IsNotNull(result);
+    }
+
+    [TestMethod]
+    public async Task GetTaskLabelCustomField_ReturnsCustomField()
+    {
+        // Arrange
+        var actions = new TaskActions(InvocationContext);
+        var taskRequest = new TaskRequest
+        {
+            TaskId = "86baxgdyr",
+            ListId = "901417947717",
+            FolderId = "901410616216"
+        };
+        var fieldRequest = new CustomLabelFieldRequest { FieldId = "5f958ca8-3d31-43ec-a617-aa8ea3cc3d77" };
+
+        // Act
+        var result = await actions.GetTaskLabelCustomField(taskRequest, fieldRequest);
+
+        // Assert
+        PrintResult(result);
+        Assert.IsNotNull(result);
+    }
+    
+    [TestMethod]
+    public async Task GetTaskCheckboxCustomField_ReturnsCustomField()
+    {
+        // Arrange
+        var actions = new TaskActions(InvocationContext);
+        var taskRequest = new TaskRequest
+        {
+            TaskId = "86baxgdyr",
+            ListId = "901417947717",
+            FolderId = "901410616216"
+        };
+        var fieldRequest = new CustomCheckboxFieldRequest { FieldId = "e5d66086-e926-4b6b-a825-3eea03673a4e" };
+
+        // Act
+        var result = await actions.GetTaskCheckboxCustomField(taskRequest, fieldRequest);
 
         // Assert
         PrintResult(result);

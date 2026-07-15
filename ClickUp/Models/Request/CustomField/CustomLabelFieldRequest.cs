@@ -4,8 +4,8 @@ using Blackbird.Applications.Sdk.Common.Dynamic;
 
 namespace Apps.ClickUp.Models.Request.CustomField;
 
-public class CustomDropdownFieldRequest
+public class CustomLabelFieldRequest
 {
-    [Display("Dropdown ID"), DataSource(typeof(DropdownCustomFieldDataHandler))]
+    [Display("Label field ID"), DataSource(typeof(LabelCustomFieldDataHandler))]
     public string FieldId { get; set; } = string.Empty;
 }
