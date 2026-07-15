@@ -122,7 +122,7 @@ public class CustomFieldActions(InvocationContext invocationContext) : ClickUpAc
         [ActionParameter] CustomLabelFieldRequest fieldInput,
         [ActionParameter] CustomLabelFieldValue fieldValueInput)
     {
-        var payload = new { values = fieldValueInput.LabelValueIds.ToHashSet() };
+        var payload = new { values = fieldValueInput.LabelValueIds.ToHashSet().ToArray() };
         return SetCustomFieldValue(taskInput.TaskId, fieldInput.FieldId, query, payload);
     }
     
