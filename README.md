@@ -20,8 +20,8 @@ ClickUp project management software that allows you to plan, track and collabora
 	 ![example1](ClickUp/image/clickup-team-id.png)
 8.  Input Space ID you are working under. You can find it in your URL
 	 ![example2](ClickUp/image/clickup-space-id.png)
-7.  Click _Connect_.
-8.  Confirm that the connection has appeared and the status is _Connected_.
+9.  Click _Connect_.
+10. Confirm that the connection has appeared and the status is _Connected_.
 
 ## Actions
 
@@ -74,6 +74,8 @@ ClickUp project management software that allows you to plan, track and collabora
 
 ## Events
 
+### Tasks
+
 - **On task created** is triggered when a new task is created.
 - **On task updated** is triggered when a task is updated.
 - **On task deleted** is triggered when a task is deleted.
@@ -87,18 +89,33 @@ ClickUp project management software that allows you to plan, track and collabora
 - **On task comment updated** is triggered when an existing `comment` on a task is updated.
 - **On task time estimate updated** is triggered when the time estimate on a task is added or updated.
 - **On task time tracked updated** is triggered when the time tracked on a task is added, updated, or deleted.
+
+### Lists
+
 - **On list created** is triggered when a new list is created.
 - **On list updated** is triggered when an existing list is updated.
 - **On list deleted** is triggered when a list is deleted.
+
+### Folders
+
 - **On folder created** is triggered when a new folder is created.
 - **On folder updated** is triggered when an existing folder is updated.
 - **On folder deleted** is triggered when a folder is deleted.
+
+### Spaces
+
 - **On space created** is triggered when a new space is created.
 - **On space updated** is triggered when an existing space is updated.
 - **On space deleted** is triggered when a space is deleted.
+
+### Goals
+
 - **On goal created** is triggered when a new goal is created.
 - **On goal updated** is triggered when an existing goal is updated.
 - **On goal deleted** is triggered when a goal is deleted.
+
+### Key results
+
 - **On key result created** is triggered when a new target is created.
 - **On key result updated** is triggered when an existing target is updated.
 - **On key result deleted** is triggered when a target is deleted.
@@ -109,7 +126,6 @@ In the future we can add actions for:
 
 - Users
 - Members
-- Custom fields
 - Comments
 
 ## Feedback

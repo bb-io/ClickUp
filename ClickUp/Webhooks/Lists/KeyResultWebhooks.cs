@@ -5,7 +5,7 @@ using Blackbird.Applications.Sdk.Common.Webhooks;
 
 namespace Apps.ClickUp.Webhooks.Lists;
 
-[WebhookList]
+[WebhookList("Key results")]
 public class KeyResultWebhooks : ClickUpWebhookList
 {
     [Webhook("On key result created", typeof(KeyResultCreatedHandler), Description = "On a new key result is created")]

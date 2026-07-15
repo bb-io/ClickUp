@@ -5,7 +5,7 @@ using Blackbird.Applications.Sdk.Common.Webhooks;
 
 namespace Apps.ClickUp.Webhooks.Lists;
 
-[WebhookList]
+[WebhookList("Spaces")]
 public class SpaceWebhooks : ClickUpWebhookList
 {
     [Webhook("On space created", typeof(SpaceCreatedHandler), Description = "On a new space is created")]

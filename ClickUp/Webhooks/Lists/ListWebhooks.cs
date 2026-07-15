@@ -5,7 +5,7 @@ using Blackbird.Applications.Sdk.Common.Webhooks;
 
 namespace Apps.ClickUp.Webhooks.Lists;
 
-[WebhookList]
+[WebhookList("Lists")]
 public class ListWebhooks : ClickUpWebhookList
 {
     [Webhook("On list created", typeof(ListCreatedHandler), Description = "On a new list is created")]

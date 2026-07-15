@@ -5,7 +5,7 @@ using Blackbird.Applications.Sdk.Common.Webhooks;
 
 namespace Apps.ClickUp.Webhooks.Lists;
 
-[WebhookList]
+[WebhookList("Goals")]
 public class GoalWebhooks : ClickUpWebhookList
 {
     [Webhook("On goal created", typeof(GoalCreatedHandler), Description = "On a new goal is created")]

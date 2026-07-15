@@ -5,7 +5,7 @@ using Blackbird.Applications.Sdk.Common.Webhooks;
 
 namespace Apps.ClickUp.Webhooks.Lists;
 
-[WebhookList]
+[WebhookList("Folders")]
 public class FolderWebhooks : ClickUpWebhookList
 {
     [Webhook("On folder created", typeof(FolderCreatedHandler), Description = "On a new folder is created")]
