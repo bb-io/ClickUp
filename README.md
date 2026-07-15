@@ -29,39 +29,69 @@ ClickUp project management software that allows you to plan, track and collabora
 
 - **Create attachment** uploads a file to a `task` as an attachment.
 
+### Custom fields
+
+- **Search custom fields** returns all custom fields of a chosen `list`, optionally filtered by field type and name.
+- **Set string custom field value** sets a string value (URL, Email, Phone, Text) on a task's custom field.
+- **Set number custom field value** sets a number value (Number, Money, Emoji) on a task's custom field.
+- **Set date custom field value** sets a date value on a task's custom field.
+- **Set location custom field value** sets a location value on a task's custom field.
+- **Set dropdown custom field value** sets a dropdown value on a task's custom field.
+- **Set label custom field value** sets label values on a task's custom field.
+- **Set checkbox custom field value** sets a checkbox value on a task's custom field.
+- **Remove custom field value** clears a specific custom field's value on a task.
+
 ### Folders
 
 - **Search folders** returns all folders of a chosen `space`.
-- **Get/create/delete folder**.
+- **Create folder** creates a new folder in a `space`.
+- **Get folder** returns the details of a specific folder.
+- **Delete folder** deletes a specific folder.
 
 ### Goals
 
-- **Search goals** returns all goals of specified `team`.
-- **Get/create/delete goal**.
-- **Create key result** adds a `target` to a goal.
+- **Search goals** returns all goals of the current team.
+- **Create goal** creates a new goal.
+- **Get goal** returns the details of a specific goal.
+- **Delete goal** deletes a specific goal.
+- **Create key result** creates a key result for a specific goal.
 
 ### Lists
 
-- **Get lists from space** returns all lists in a `space` that aren't located in a folder/
-- **Get lists from folder** returns all lists within a specified `folder`.
-- **Create space list** adds a new list in a specified `space`.
-- **Create folder list** adds a new list to a specified `folder`.
-- **Delete list** deletes list.
+- **Get lists from space** returns all lists of a chosen `space`.
+- **Get lists from folder** returns all lists of a chosen `folder`.
+- **Create folder list** creates a new list in a `folder`.
+- **Create space list** creates a new list in a `space`.
+- **Delete list** deletes a specific list.
+- **Get list** returns the details of a specific list.
 
 ### Spaces
 
-- **Search spaces** returns all spaces of specified `team`.
-- **Get/create/update space**
+- **Search spaces** returns all spaces of a chosen `team`.
+- **Create space** creates a new space in a `team`.
+- **Update space** updates an existing space.
+- **Get space** returns the details of a specific space.
 
 ### Tags
 
-- **Search tags** returns all tags of specified `space`.
-- **Create/delete tag**.
+- **Search tags** returns all tags of a chosen `space`.
+- **Create tag** creates a new tag in a `space`.
+- **Delete tag** deletes a specific space tag.
 
 ### Tasks
 
-- **Search tasks** returns all tasks of specified `list`.
-- **Get/create/update/delete task**.
+- **Search tasks** returns all tasks of a chosen `list`.
+- **Get task** returns the details of a specific task.
+- **Create task** creates a new task in a `list`.
+- **Update task** updates an existing task.
+- **Delete task** deletes a specific task.
+- **Get task string custom field** returns a task's custom field with a string value (Text, Short text).
+- **Get task number custom field** returns a task's custom field with a number value.
+- **Get task date custom field** returns a task's custom field with a date value.
+- **Get task location custom field** returns a task's custom field with a location value.
+- **Get task dropdown custom field** returns a task's custom field with a dropdown value.
+- **Get task label custom field** returns a task's custom field with label values.
+- **Get task checkbox custom field** returns a task's custom field with a checkbox value.
 
 ### Teams - Workspaces
 
