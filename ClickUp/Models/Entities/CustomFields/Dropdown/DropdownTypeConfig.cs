@@ -2,8 +2,8 @@ using Newtonsoft.Json;
 
 namespace Apps.ClickUp.Models.Entities.CustomFields.Dropdown;
 
-public class TypeConfig
+public class DropdownTypeConfig
 {
     [JsonProperty("options")]
-    public List<TypeConfigOption> Options { get; set; } = [];
+    public List<DropdownTypeConfigOption> Options { get; set; } = [];
 }

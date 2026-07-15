@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Apps.ClickUp.Models.Entities.CustomFields.Dropdown;
 
-public class TypeConfigOption
+public class DropdownTypeConfigOption
 {
     [JsonProperty("id")]
     public string Id { get; set; } = string.Empty;
