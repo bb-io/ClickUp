@@ -114,4 +114,31 @@ public class CustomFieldActionTests : TestBase
         // Act
         await actions.SetLocationCustomFieldValue(taskRequest, query, fieldRequest, fieldValue);
     }
+    
+    [TestMethod]
+    public async Task SetLabelCustomFieldValue_IsSuccess()
+    {
+        // Arrange
+        var actions = new CustomFieldActions(InvocationContext);
+        var taskRequest = new TaskRequest
+        {
+            TaskId = "86baxgdyr",
+            ListId = "901417947717",
+            FolderId = "901410616216",
+        };
+        var query = new CreateRequestQuery { };
+        var fieldRequest = new CustomLabelFieldRequest { FieldId = "5f958ca8-3d31-43ec-a617-aa8ea3cc3d77" };
+        var fieldValue = new CustomLabelFieldValue
+        {
+            LabelValueIds = [
+                "18293c8b-3f8d-4b7d-9639-1f604c55fe68", 
+                "18293c8b-3f8d-4b7d-9639-1f604c55fe68",
+                "578a624d-eec3-4b1a-b07a-2e06033f82da",
+                "18293c8b-3f8d-4b7d-9639-1f604c55fe68"
+            ]
+        };
+
+        // Act
+        await actions.SetLabelCustomFieldValue(taskRequest, query, fieldRequest, fieldValue);
+    }
 }
