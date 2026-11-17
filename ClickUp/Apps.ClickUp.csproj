@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <Product>ClickUp</Product>
     <Description>Customizable workplace productivity platform</Description>
-    <Version>1.0.12</Version>
+    <Version>1.0.13</Version>
     <AssemblyName>Apps.ClickUp</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
@@ -19,8 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\README.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="..\README.md" Link="README.md" CopyToOutputDirectory="Always" />
   </ItemGroup>
 </Project>
